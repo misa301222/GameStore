@@ -1,0 +1,110 @@
+<div class="container">
+    <table class="table table-responsive table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Product ID</th>
+                <th scope="col">Product Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Category</th>
+                <th scope="col">Cover URL</th>
+                <th scope="col">Price</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let product of products">
+                <th scope="row">{{product.productId}}</th>
+                <td>{{product.productName}}</td>
+                <td>{{product.description}}</td>
+                <td>{{product.category}}</td>
+                <td>{{product.coverUrl}}</td>
+                <td>{{product.price}}</td>
+                <td>
+                    <button type="button" (click)="openModalEdit(content, product)" class="btn btn-warning btn-sm"><i
+                            class="bi bi-pencil-fill"></i></button>
+                    <button type="button" (click)="openModalDelete(contentDelete, product.productId)"
+                        class="btn btn-danger btn-sm"><i class="bi bi-trash-fill"></i></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Edit Product</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        </button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="editProductForm" (ngSubmit)="editProduct()">
+            <div class="card">
+                <div class="card-header">
+                    Add product
+                </div>
+                <div class="card-body">
+
+                    <div class="mb-3">
+                        <label for="productIdInput" class="form-label">Product ID</label>
+                        <input formControlName="productId" name="productId" type="number" class="form-control"
+                            id="productIdInput" placeholder="Product ID">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="productNameInput" class="form-label">Product Name</label>
+                        <input formControlName="productName" name="productName" type="text" class="form-control"
+                            id="productNameInput" placeholder="Product name">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="descriptionInput" class="form-label">Description</label>
+                        <input formControlName="description" name="description" type="text" class="form-control"
+                            id="descriptionInput" placeholder="Description">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="coverInput" class="form-label">Cover URL</label>
+                        <input formControlName="cover" name="cover" type="text" class="form-control" id="coverInput"
+                            placeholder="Cover URL">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="categoryInput" class="form-label">Category</label>
+                        <select formControlName="category" name="category" class="form-select"
+                            aria-label="Default select example" id="categoryInput" (change)="onChangeCategory($event)">
+                            <option [ngValue]="null">Choose a Category</option>
+                            <option *ngFor="let category of categories" [value]="category.categoryId">{{
+                                category.categoryId}} - {{ category.categoryName
+                                }}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="priceInput" class="form-label">Price</label>
+                        <input formControlName="price" name="price" type="number" class="form-control" id="priceInput"
+                            placeholder="">
+                    </div>
+
+                    <div class="mb-3" style="text-align: center;">
+                        <button type="submit" class="btn btn-primary">Edit</button>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </div>
+</ng-template>
+
+<ng-template #contentDelete let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Delete Product</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        </button>
+    </div>
+    <div class="modal-body">
+        <p>Do you want to delete this game? [{{idToDelete}}]</p>
+        <button type="submit" (click)="deleteProduct(idToDelete)" class="btn btn-danger">Yes</button>
+        <button type="submit" (click)="modal.dismiss('Cross click')" class="btn btn-primary">No</button>
+    </div>
+</ng-template>

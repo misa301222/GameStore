@@ -1,0 +1,45 @@
+<p>add-category works!</p>
+
+<div class="row justify-content-center">
+    <form [formGroup]="addCategoryForm" (ngSubmit)="onSubmit(content)" class=" col-sm-4 ">
+        <div class="card">
+            <div class="card-header">
+                Add Category
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <label for="categoryIdInput" class="form-label">Category ID</label>
+                    <input formControlName="categoryId" name="categoryId" type="number" class="form-control"
+                        id="categoryIdInput" placeholder="Id">
+                </div>
+
+                <div class="mb-3">
+                    <label for="categoryNameInput" class="form-label">Description</label>
+                    <input formControlName="categoryName" name="categoryName" type="text" class="form-control"
+                        id="categoryNameInput" placeholder="Name">
+                </div>
+                
+                <div class="mb-3" style="text-align: center;">
+                    <button type="submit" class="btn btn-primary" [disabled]="!addCategoryForm.valid">Register</button>
+                </div>
+
+            </div>
+        </div>
+    </form>
+</div>
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Success!</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+            <p> Category Added Sussessfully!</p>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="modal.close()">OK!</button>
+    </div>
+</ng-template>

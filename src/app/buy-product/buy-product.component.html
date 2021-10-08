@@ -1,0 +1,31 @@
+<div class="container">
+
+    <div class="card">
+        <div class="row g-0">
+            <div class="card-header">
+                {{selectedProduct.productName}}
+            </div>
+
+            <div class="col-md-4" *ngIf="selectedProduct.coverUrl; else noImageFound ">
+                <img src={{selectedProduct.coverUrl}} class="img-fluid rounded-start imagen" alt="...">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">{{selectedProduct.productName}}</h5>
+                    <p class="card-text">{{selectedProduct.description}}</p>
+                </div>                
+            </div>
+            <div class="card-footer text-end">
+                <button type="button" class="btn btn-success">Buy Now!</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<ng-template #noImageFound>
+    <div class="col-md-4">
+        <img src="https://user-images.githubusercontent.com/24848110/33519396-7e56363c-d79d-11e7-969b-09782f5ccbab.png"
+            class="card-img-top imagen" alt="...">
+    </div>
+</ng-template>

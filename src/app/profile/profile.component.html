@@ -1,0 +1,16 @@
+<p>profile works!</p>
+<div class="container">
+    <div class="card" style="width: 18rem;">
+        <img src="" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title text-center">{{user.fullName}}</h5>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Email: {{user.email}}</li>
+            <li class="list-group-item">UserName: {{user.userName}}</li>
+            <li class="list-group-item">Roles: {{ user.roles }} </li>
+            <li class="list-group-item">Funds: {{ user.funds }} </li>
+            <li class="list-group-item"><button type="button" (click)="addFunds()" class="btn btn-primary">Add Funds</button></li>            
+        </ul>
+    </div>
+</div>

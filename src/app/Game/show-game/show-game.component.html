@@ -1,0 +1,92 @@
+<table class="table table-striped table-bordered table-sm row-border hover" id="datatableexample">
+    <thead>
+        <tr>
+            <th scope="col">Id Game</th>
+            <th scope="col">Name</th>
+            <th scope="col">Publisher</th>
+            <th scope="col">Price</th>
+            <th scope="col">Release Date</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let game of gameList">
+            <td>
+                {{ game.idGame }}
+            </td>
+            <td>
+                {{game.gameName}}
+            </td>
+            <td>
+                {{ game.publisher}}
+            </td>
+            <td>
+                {{ game.price}}
+            </td>
+
+            <td>
+                {{ game.releaseDate}}
+            </td>
+
+            <td style="text-align:center">
+                <button type="button" (click)="openModalEdit(content, game)" class="btn btn-warning">Editar</button>
+                <button type="button" (click)="deleteGame(game.idGame)" class="btn btn-danger">Eliminar</button>
+            </td>
+
+        </tr>
+    </tbody>
+</table>
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Edit Game</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        </button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="editGameForm" (ngSubmit)="editGame()">
+            <div class="card">
+                <div class="card-header">
+                    Featured
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label for="inputIdGame" class="form-label">Game Id</label>
+                        <input formControlName="idGame" type="number" class="form-control" id="inputIdGame"
+                            placeholder="Game id">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="inputGameName" class="form-label">Game Name</label>
+                        <input formControlName="gameName" type="text" class="form-control" id="inputGameName"
+                            placeholder="Name of the game">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="inputPublisher" class="form-label">Publisher</label>
+                        <input formControlName="publisher" type="text" class="form-control" id="inputPublisher"
+                            placeholder="Publisher of the game">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="inputPrice" class="form-label">Price</label>
+                        <input formControlName="price" type="number" class="form-control" id="inputPrice"
+                            placeholder="Price of the game USD">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="inputReleaseDate" class="form-label">Release Date</label>
+                        <input formControlName="releaseDate" type="date" class="form-control" id="inputReleaseDate"
+                            placeholder="name@example.com">
+                    </div>
+
+                    <div class="mb-3" style="text-align: center;">
+                        <button type="submit" class="btn btn-primary"
+                            [disabled]="!editGameForm.valid">Register</button>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </div>
+</ng-template>

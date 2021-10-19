@@ -14,58 +14,56 @@ export class GameService {
 
   constructor(private httpClient: HttpClient) { }
 
+  //TODO AGREGAR CATEGORIA A TODO
   public getAllGames() {
     let userInfo = JSON.parse(localStorage.getItem(Constants.USER_KEY));
-    //console.log(userInfo);
+
     const headers = new HttpHeaders({
       "Authorization": `Bearer ${userInfo?.token}`
     })
-    /*
-    return this.httpClient.get<ResponseModel>(this.baseURL + "/GetAllGames", { headers: headers }).pipe(map((res: any) => {
-      let gameList = new Array<Game>();
-      if (res.responseCode == 1) {
-        if (res.dataSet) {
-          res.dataSet.map((x: Game) => {
-            gameList.push(new Game(x.idGame, x.gameName, x.publisher, x.price, x.releaseDate));
-          })
-        }
-
-      }
-      return gameList;
-
-    }));
-    */
     return this.httpClient.get<Game[]>(this.baseURL + "/GetAllGames", { headers: headers });
 
   }
 
-  addGame(idGame: number, gameName: string, publisher: string, price: number, releaseDate: string) {
+  addGame(idGame: number, gameName: string, publisher: string, price: number, releaseDate: string, category: number, coverUrl: string, description: string, quantity: number) {
 
     const body = {
       IdGame: idGame,
-      GameName : gameName,      
-      Publisher : publisher,
-      Price : price,
-      ReleaseDate : releaseDate
+      GameName: gameName,
+      Publisher: publisher,
+      Price: price,
+      ReleaseDate: releaseDate,
+      category: category,
+      coverUrl: coverUrl,
+      description: description,
+      quantity: quantity
     }
     return this.httpClient.post<Game>(this.baseURL + '/AddGame', body);
   }
 
-  deleteGame(idGame : number){
-    return this.httpClient.delete<Game>(this.baseURL + '/'+ idGame);
+  deleteGame(idGame: number) {
+    return this.httpClient.delete<Game>(this.baseURL + '/' + idGame);
   }
 
-  editGame(idGame: number, gameName: string, publisher: string, price: number, releaseDate: string) {
+  editGame(idGame: number, gameName: string, publisher: string, price: number, releaseDate: string, category: number, coverUrl: string, description: string, quantity: number) {
 
     const body = {
       IdGame: idGame,
-      GameName : gameName,      
-      Publisher : publisher,
-      Price : price,
-      ReleaseDate : releaseDate
+      GameName: gameName,
+      Publisher: publisher,
+      Price: price,
+      ReleaseDate: releaseDate,
+      category: category,
+      coverUrl: coverUrl,
+      description: description,
+      quantity: quantity
     }
-    
+
     return this.httpClient.put<Game>(this.baseURL + '/' + idGame, body);
+  }
+
+  getGameById(idGame: number) {
+    return this.httpClient.get<Game>(this.baseURL + '/' + idGame);
   }
 
 

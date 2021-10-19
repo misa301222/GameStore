@@ -35,6 +35,34 @@
                         placeholder="name@example.com">
                 </div>
 
+                <div class="mb-3">
+                    <label for="categoryInput" class="form-label">Category</label>
+                    <select formControlName="category" name="category" class="form-select" aria-label="Default select example" id="categoryInput" (change)="onChangeCategory($event)">
+                        <option [ngValue]="null">Choose a Category</option>
+                        <option *ngFor="let category of categories" [value]="category.categoryId">{{ category.categoryId}} - {{ category.categoryName
+                            }}
+                        </option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="inputCoverUrl" class="form-label">Cover Url</label>
+                    <input formControlName="coverUrl" type="text" class="form-control" id="inputCoverUrl"
+                        placeholder="Url of image">
+                </div>
+
+                <div class="mb-3">
+                    <label for="inputDescription" class="form-label">Description</label>
+                    <input formControlName="description" type="text" class="form-control" id="inputDescription"
+                        placeholder="Desc">
+                </div>
+
+                <div class="mb-3">
+                    <label for="inputQuantity" class="form-label">Quantity</label>
+                    <input formControlName="quantity" type="number" class="form-control" id="inputQuantity"
+                        placeholder="Quantity">
+                </div>
+
                 <div class="mb-3" style="text-align: center;">
                     <button type="submit" class="btn btn-primary" [disabled]="!registerGameForm.valid">Register</button>
                 </div>

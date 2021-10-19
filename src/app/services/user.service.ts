@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ResponseModel } from '../Models/reponseModel';
 import { map } from 'rxjs/operators';
@@ -23,7 +23,7 @@ export class UserService {
     return this.httpClient.post<ResponseModel>(this.baseURL + "/Login", body);
   }
 
-  public register(fullname: string, email: string, password: string, roles: string[], funds : number) {
+  public register(fullname: string, email: string, password: string, roles: string[], funds: number) {
     const body = {
       FullName: fullname,
       Email: email,
@@ -113,20 +113,28 @@ export class UserService {
     }));
   }
 
-  public addFunds(){
+  public getEmail(){
     let userInfo = JSON.parse(localStorage.getItem(Constants.USER_KEY));
     let email = userInfo.email;
+    return email;
+  }
 
-    /*
-    const body = {
-      FullName: fullname,
-      Email: email,
-      Password: password,
-      Roles: roles,
-      Funds: funds,
+  public addFunds(email: string, totalFunds: number) {
+    let em = email.replace(/['"]+/g, '');
+    let body = {
+      Email: em,
+      Funds: totalFunds
     }
-    */
+    return this.httpClient.post<ResponseModel>(this.baseURL + '/AddFunds', body);
+  }
 
+  public removeFunds(email: string, totalFunds: number) {
+    let em = email.replace(/['"]+/g, '');
+    let body = {
+      Email: em,
+      Funds: totalFunds
+    }
+    return this.httpClient.post<ResponseModel>(this.baseURL + '/RemoveFunds', body);
   }
 
 }

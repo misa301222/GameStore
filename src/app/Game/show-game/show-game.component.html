@@ -6,7 +6,11 @@
             <th scope="col">Publisher</th>
             <th scope="col">Price</th>
             <th scope="col">Release Date</th>
-            <th scope="col">Action</th>
+            <th scope="col">Category</th>
+            <th scope="col">Url</th>
+            <th scope="col">Description</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Action</th>            
         </tr>
     </thead>
     <tbody>
@@ -26,6 +30,22 @@
 
             <td>
                 {{ game.releaseDate}}
+            </td>
+
+            <td>
+                {{ game.category }} 
+            </td>
+
+            <td>
+                {{ game.coverUrl }} 
+            </td>
+
+            <td>
+                {{ game.description }} 
+            </td>
+
+            <td>
+                {{ game.quantity }} 
             </td>
 
             <td style="text-align:center">
@@ -80,9 +100,36 @@
                             placeholder="name@example.com">
                     </div>
 
+                    <div class="mb-3">
+                        <label for="categoryInput" class="form-label">Category</label>
+                        <select formControlName="category" name="category" class="form-select" aria-label="Default select example" id="categoryInput" (change)="onChangeCategory($event)">
+                            <option [ngValue]="null">Choose a Category</option>
+                            <option *ngFor="let category of categories" [value]="category.categoryId">{{ category.categoryId}} - {{ category.categoryName
+                                }}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="inputCoverUrl" class="form-label">Cover Url</label>
+                        <input formControlName="coverUrl" type="text" class="form-control" id="inputCoverUrl"
+                            placeholder="Url of image">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="inputDescription" class="form-label">Description</label>
+                        <input formControlName="description" type="text" class="form-control" id="inputDescription"
+                            placeholder="Desc">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="inputQuantity" class="form-label">Quantity</label>
+                        <input formControlName="quantity" type="number" class="form-control" id="inputQuantity"
+                            placeholder="Quantity">
+                    </div>
+
                     <div class="mb-3" style="text-align: center;">
-                        <button type="submit" class="btn btn-primary"
-                            [disabled]="!editGameForm.valid">Register</button>
+                        <button type="submit" class="btn btn-primary" [disabled]="!editGameForm.valid">Register</button>
                     </div>
 
                 </div>

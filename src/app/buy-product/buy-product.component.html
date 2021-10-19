@@ -16,7 +16,7 @@
                 </div>                
             </div>
             <div class="card-footer text-end">
-                <button type="button" class="btn btn-success">Buy Now!</button>
+                <button type="button" class="btn btn-success" (click)="addToCart(selectedProduct, content)">Buy Now!</button>
             </div>
         </div>
     </div>
@@ -27,5 +27,22 @@
     <div class="col-md-4">
         <img src="https://user-images.githubusercontent.com/24848110/33519396-7e56363c-d79d-11e7-969b-09782f5ccbab.png"
             class="card-img-top imagen" alt="...">
+    </div>
+</ng-template>
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Success!</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+            <p> Product Added To Cart Sussessfully!</p>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-success" (click)="goToCart()">Go to Cart!</button>
+        <button type="button" class="btn btn-danger" (click)="modal.close()">Dismiss</button>
     </div>
 </ng-template>

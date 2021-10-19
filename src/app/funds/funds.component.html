@@ -1,19 +1,37 @@
 <p>funds works!</p>
 <div class="container">
-    <div class="card" style="width: 18rem;">
-        <div class="card-body">
-            <form [formGroup]="fundsForm" (ngSubmit)="onSubmit()">
-                <div class="mb-3 row">
-                    <label for="staticEmail" class="col-sm-3 col-form-label">Add Funds</label>
-                    <div class="col-sm-10">
-                        <input type="number" formControlName="funds" class="form-control" id="fundsInput">
-                    </div>
-                    <div class="col-sm-10">
-                        <button type="submit" class="btn btn-primary">Add!</button>
-                    </div>
+    <div class="row justify-content-center">
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <form [formGroup]="fundsForm" (ngSubmit)="onSubmit(content)">
+                    <div class="mb-3 text-center">
+                        <label for="staticEmail" class="col-sm-4 col-form-label">Add Funds</label>
+                        <div class="col-sm-10">
+                            <input type="number" formControlName="funds" class="form-control" id="fundsInput">
+                        </div>
+                        <div class="col-sm-10 text-center">
+                            <button type="submit" class="btn btn-primary">Add!</button>
+                        </div>
 
-                </div>
-            </form>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Success!</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+            <p> Funds Added Succesfully!</p>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="modal.close()">OK!</button>
+    </div>
+</ng-template>

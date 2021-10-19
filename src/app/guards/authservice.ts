@@ -8,6 +8,7 @@ import { of } from "rxjs";
     isLogin = false;
   
     roleAs: string;
+    email: string;
   
     constructor() { }
   
@@ -39,6 +40,14 @@ import { of } from "rxjs";
     getRole() {
       this.roleAs = localStorage.getItem('ROLE');
       return this.roleAs;
+    }
+
+    isAdmin(){
+      for(let currentRole of this.roleAs.split(',')){
+        if (currentRole == 'Admin')
+          return true;
+      }
+      return false;
     }
   
   }

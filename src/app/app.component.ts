@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Constants } from './Helper/constants';
+import { Category } from './Models/category';
 import { User } from './Models/user';
+import { CategoryService } from './services/category.service';
 
 @Component({
   selector: 'app-root',
@@ -10,13 +12,17 @@ import { User } from './Models/user';
 })
 export class AppComponent {
   title = 'Store';
+  categoryList : Category[] = [];
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private categoryService : CategoryService) { }
+
+  ngOnInit(): void {
+    this.getCategories();
+  }
 
   onLogout() {
     localStorage.clear();
     localStorage.removeItem(Constants.USER_KEY);
-    //this.router.navigate(["/user-managment"]);
   }
 
   get isUserLogin() {
@@ -34,6 +40,20 @@ export class AppComponent {
 
   get isUser(): boolean {
     return this.user.roles.indexOf("User") > -1 && !this.isAdmin;
+  }
+
+  getCategories(){
+    return this.categoryService.getAllCategories().subscribe(data => {
+      console.log(data);
+      this.categoryList = data;
+    })
+  }
+
+  selectCatalog(categoryId : number){
+    let url = '/catalog/' + categoryId;
+    //this.router.navigate(['/catalog/', categoryId]);
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => 
+    this.router.navigate([url]));
   }
 
 }

@@ -32,11 +32,12 @@ export class LoginComponent implements OnInit {
       console.log("data: " + data.dataSet);
       if(data.responseCode == 1){
           localStorage.setItem(Constants.USER_KEY, JSON.stringify(data.dataSet));
+          localStorage.setItem('EMAIL', email);
           let user = data.dataSet as User;
           if(user.roles.indexOf("Admin") > -1){
-            this.router.navigate(["/all-user-managment"]);
+            this.router.navigate(["/home"]);
           } else {
-            this.router.navigate(["/user-managment"]);
+            this.router.navigate(["/home"]);
           }
           this.authService.login(user.roles.toString());
       }

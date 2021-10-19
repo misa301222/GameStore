@@ -22,6 +22,12 @@ import { ShowCategoryComponent } from './Category/show-category/show-category.co
 import { AddCategoryComponent } from './Category/add-category/add-category.component';
 import { BuyProductComponent } from './buy-product/buy-product.component';
 import { FundsComponent } from './funds/funds.component';
+import { BuyGameComponent } from './buy-game/buy-game.component';
+import { CartComponent } from './cart/cart.component';
+import { HistoryComponent } from './history/history.component';
+import { DatePipe } from '@angular/common';
+import { CatalogComponent } from './catalog/catalog.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 //import {ModalModule} from "ng2-modal";
 
 @NgModule({
@@ -41,7 +47,11 @@ import { FundsComponent } from './funds/funds.component';
     ShowCategoryComponent,
     AddCategoryComponent,
     BuyProductComponent,
-    FundsComponent
+    FundsComponent,
+    BuyGameComponent,
+    CartComponent,
+    HistoryComponent,
+    CatalogComponent
   ],
   imports: [
     BrowserModule,
@@ -50,9 +60,10 @@ import { FundsComponent } from './funds/funds.component';
     HttpClientModule, 
     ReactiveFormsModule,
     DataTablesModule,
-    NgbModule
+    NgbModule,
+    Ng2SearchPipeModule
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

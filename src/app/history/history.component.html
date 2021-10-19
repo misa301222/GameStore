@@ -1,0 +1,27 @@
+<div class="container">
+    <table class="table table-responsive table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Product ID</th>
+                <th scope="col">Product Name</th>
+                <th scope="col">Price</th>
+                <th scope="col">Buy Date</th>
+                <th *ngIf="isAdmin" scope="col">Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let history of historyList">
+                <th scope="row">{{history.productId}}</th>
+                <td>{{history.productName}}</td>
+                <td>${{history.price}}</td>
+                <td>{{history.buyDate}}</td>                
+                <td *ngIf="isAdmin">{{history.email}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="container">
+        <p> Total gains: </p>
+    </div>
+
+</div>

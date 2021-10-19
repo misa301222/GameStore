@@ -20,7 +20,8 @@ export class AddProductComponent implements OnInit {
     description: [''],
     cover: ['', [Validators.required]],
     category: [''],
-    price: ['', [Validators.required]]
+    price: ['', [Validators.required]],
+    quantity: ['', [Validators.required]]
   });
 
   constructor(private productService: ProductService, private categoryService: CategoryService,
@@ -28,10 +29,6 @@ export class AddProductComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllCategories();
-  }
-
-  saveProduct() {
-
   }
 
   getAllCategories() {
@@ -42,7 +39,6 @@ export class AddProductComponent implements OnInit {
 
   onChangeCategory($event){
     this.addProductForm.controls['category'].setValue($event.target.options[$event.target.options.selectedIndex].value);
-    //console.log($event.target.options[$event.target.options.selectedIndex].value);
   }
 
 
@@ -54,16 +50,17 @@ export class AddProductComponent implements OnInit {
     let cover = this.addProductForm.controls['cover'].value;
     let category = this.addProductForm.controls['category'].value;
     let price = this.addProductForm.controls['price'].value;
+    let quantity = this.addProductForm.controls['quantity'].value;
 
-    console.log('id: '+ productId);
-    console.log('name: '+ productName);
-    console.log('desc: '+ description);
-    console.log('cov: '+ cover);
-    console.log('cat: '+ category);
-    console.log('price: '+ price);
-
-    this.productService.addProduct(productId, productName, description, cover, category, price).subscribe(data=> {
+    this.productService.addProduct(productId, productName, description, cover, category, price, quantity).subscribe(data=> {
       console.log(JSON.stringify(data));
+      this.addProductForm.controls['productId'].setValue('');
+      this.addProductForm.controls['productName'].setValue('');
+      this.addProductForm.controls['description'].setValue('');
+      this.addProductForm.controls['cover'].setValue('');
+      this.addProductForm.controls['category'].setValue('');
+      this.addProductForm.controls['price'].setValue('');
+      this.addProductForm.controls['quantity'].setValue('');
       this.open(content);
     })    
 

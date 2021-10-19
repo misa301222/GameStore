@@ -2,7 +2,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminBoardComponent } from './admin-board/admin-board.component';
 import { AllUserManagmentComponent } from './all-user-managment/all-user-managment.component';
+import { BuyGameComponent } from './buy-game/buy-game.component';
 import { BuyProductComponent } from './buy-product/buy-product.component';
+import { CartComponent } from './cart/cart.component';
+import { CatalogComponent } from './catalog/catalog.component';
 import { AddCategoryComponent } from './Category/add-category/add-category.component';
 import { ShowCategoryComponent } from './Category/show-category/show-category.component';
 import { FundsComponent } from './funds/funds.component';
@@ -11,6 +14,7 @@ import { FundsComponent } from './funds/funds.component';
 import { RegisterGameComponent } from './Game/register-game/register-game.component';
 import { ShowGameComponent } from './Game/show-game/show-game.component';
 import { AuthGuard } from './guards/auth.guard';
+import { HistoryComponent } from './history/history.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { AddProductComponent } from './Product/add-product/add-product.component';
@@ -101,7 +105,35 @@ const routes: Routes = [
     }
   },
   {
+    path: "Game/buy-game/:idGame", component: BuyGameComponent,
+    canActivate: [AuthGuard],
+    data: {
+      role: ['Admin', 'User']
+    }
+  },
+  {
+    path: "catalog/:categoryId", component: CatalogComponent,
+    canActivate: [AuthGuard],
+    data: {
+      role: ['Admin', 'User']
+    }
+  },
+  {
     path: "funds", component: FundsComponent,
+    canActivate: [AuthGuard],
+    data: {
+      role: ['Admin', 'User']
+    }
+  },
+  {
+    path: "cart", component: CartComponent,
+    canActivate: [AuthGuard],
+    data: {
+      role: ['Admin', 'User']
+    }
+  },
+  {
+    path: "history", component: HistoryComponent,
     canActivate: [AuthGuard],
     data: {
       role: ['Admin', 'User']

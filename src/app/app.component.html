@@ -7,7 +7,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <a class="nav-link active" *ngIf="!isUserLogin" aria-current="page" routerLink="/login">Login</a>
         </li>
@@ -19,14 +19,28 @@
           <a class="nav-link" *ngIf="isUserLogin" routerLink="/home">Home</a>
         </li>
 
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            Explore
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li *ngFor="let category of categoryList"> <a class="dropdown-item"
+                (click)="selectCatalog(category.categoryId)"><i class="bi bi-bag-dash"></i>
+                {{category.categoryName}}s</a> </li>
+          </ul>
+        </li>
+
         <li class="nav-item dropdown" *ngIf="isUserLogin">
-          <a class="nav-link dropdown-toggle" href="#"  id="navbarDropdown" role="button"
-            data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
             Account
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item" routerLink="/profile"><i class="bi bi-person-square"></i> My profile</a></li>
-            <li><a class="dropdown-item" *ngIf="isUserLogin && isAdmin" routerLink="/admin-board"><i class="bi bi-tools"></i> Admin Tools</a></li>
+            <li><a class="dropdown-item" routerLink="/history"><i class="bi bi-clock-history"></i> History</a></li>
+            <li><a class="dropdown-item" *ngIf="isUserLogin && isAdmin" routerLink="/admin-board"><i
+                  class="bi bi-tools"></i> Admin Tools</a></li>
             <!--
             <li><a class="dropdown-item" *ngIf="isUserLogin && !isUser" routerLink="/add-game"><i
                   class="bi bi-file-earmark-plus"></i> Add Games</a></li>
@@ -42,10 +56,17 @@
                   class="bi bi-box-arrow-right"></i> Logout</a></li>
           </ul>
         </li>
+
+        <li class="nav-item">
+          <a class="nav-link" *ngIf="isUserLogin" routerLink="/cart">Cart</a>
+        </li>
+
       </ul>
 
     </div>
   </div>
 </nav>
+
+
 
 <router-outlet></router-outlet>

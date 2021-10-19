@@ -14,6 +14,7 @@ import { ProductService } from 'src/app/services/product.service';
 export class ShowProductComponent implements OnInit {
 
   idToDelete : number;
+  filterTerm : string;
 
   public editProductForm = this.formBuilder.group({
     productId: ['', [Validators.required]],
@@ -21,7 +22,8 @@ export class ShowProductComponent implements OnInit {
     description: [''],
     cover: ['', [Validators.required]],
     category: [''],
-    price: ['', [Validators.required]]
+    price: ['', [Validators.required]],
+    quantity: ['', [Validators.required]]
   });
 
   constructor(private productService: ProductService, private formBuilder: FormBuilder, private modalService: NgbModal, private categoryService: CategoryService) { }
@@ -58,6 +60,7 @@ export class ShowProductComponent implements OnInit {
     this.editProductForm.controls['cover'].setValue(product.coverUrl);
     this.editProductForm.controls['category'].setValue(product.category);
     this.editProductForm.controls['price'].setValue(product.price);
+    this.editProductForm.controls['quantity'].setValue(product.quantity);
   }
 
   openModalDelete(contentDelete, productId : number){
@@ -73,6 +76,7 @@ export class ShowProductComponent implements OnInit {
     let cover = this.editProductForm.controls['cover'].value;
     let category = this.editProductForm.controls['category'].value;
     let price = this.editProductForm.controls['price'].value;
+    let quantity = this.editProductForm.controls['quantity'].value;
 
     console.log(idProduct);
     console.log(productName);
@@ -81,7 +85,7 @@ export class ShowProductComponent implements OnInit {
     console.log(category);
     console.log(price);
 
-    this.productService.editProduct(idProduct, productName, description, cover, category, price).subscribe(data => {
+    this.productService.editProduct(idProduct, productName, description, cover, category, price, quantity).subscribe(data => {
       console.log(data);
       this.editProductForm.controls['productId'].setValue('');
       this.editProductForm.controls['productName'].setValue('');

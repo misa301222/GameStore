@@ -15,6 +15,10 @@ export class CategoryService {
     return this.httpClient.get<Category[]>(this.baseURL + '/GetAllCategories');
   }
 
+  getCategoryById(categoryId: number) {
+    return this.httpClient.get<Category>(this.baseURL + categoryId);
+  }
+
   addCategory(categoryId: number, categoryName: string) {
     const body = {
       CategoryId: categoryId,
@@ -33,7 +37,7 @@ export class CategoryService {
     return this.httpClient.put<Category>(this.baseURL + '/', body);
   }
 
-  deleteCategory(cateogryId : number){
+  deleteCategory(cateogryId: number) {
     return this.httpClient.delete<Category>(this.baseURL + '/' + cateogryId);
   }
 

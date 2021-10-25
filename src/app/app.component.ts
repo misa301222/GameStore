@@ -1,26 +1,34 @@
+import { state, style, trigger } from '@angular/animations';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { bounceInAnimation, fadeInDownAnimation } from 'angular-animations';
 import { Constants } from './Helper/constants';
 import { Category } from './Models/category';
 import { User } from './Models/user';
+import { CartService } from './services/cart.service';
 import { CategoryService } from './services/category.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  animations: [
+    //TODO ANIMACION AL ABRIR DROPDOWNMENU
+    fadeInDownAnimation()
+  ]
 })
 export class AppComponent {
   title = 'Store';
-  categoryList : Category[] = [];
+  categoryList: Category[] = [];
 
-  constructor(private router: Router, private categoryService : CategoryService) { }
+  constructor(private router: Router, private categoryService: CategoryService, private cartService : CartService) { }
 
   ngOnInit(): void {
     this.getCategories();
   }
 
   onLogout() {
+    this.cartService.removeAllCart();
     localStorage.clear();
     localStorage.removeItem(Constants.USER_KEY);
   }
@@ -42,18 +50,18 @@ export class AppComponent {
     return this.user.roles.indexOf("User") > -1 && !this.isAdmin;
   }
 
-  getCategories(){
+  getCategories() {
     return this.categoryService.getAllCategories().subscribe(data => {
       console.log(data);
       this.categoryList = data;
     })
   }
 
-  selectCatalog(categoryId : number){
+  selectCatalog(categoryId: number) {
     let url = '/catalog/' + categoryId;
     //this.router.navigate(['/catalog/', categoryId]);
-    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => 
-    this.router.navigate([url]));
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
+      this.router.navigate([url]));
   }
 
 }

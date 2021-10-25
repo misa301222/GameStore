@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Product } from '../Models/product';
 
@@ -59,8 +59,14 @@ export class ProductService {
     return this.httpClient.post<Product>(this.baseURL + '/UpdateQuantity', body);
   }
 
-  getAllProductsByCategoryId(categoryId : number){
+  getAllProductsByCategoryId(categoryId: number) {
     return this.httpClient.get<Product[]>(this.baseURL + '/GetAllProductByCategoryId/' + categoryId);
+  }
+
+  generateReport() {
+    let headers = new HttpHeaders();
+    headers = headers.set('Accept', 'application/pdf');
+    return this.httpClient.get<File>(this.baseURL + '/GenerateReport', {headers:headers, responseType: 'blob' as 'json'});
   }
 
 }

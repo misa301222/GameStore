@@ -25,6 +25,7 @@ import { of } from "rxjs";
       this.roleAs = '';
       localStorage.setItem('STATE', 'false');
       localStorage.setItem('ROLE', '');
+      //TODO BORRAR CART ELEMENTS AL LOGOUT
       return of({ success: this.isLogin, role: '' });
     }
   

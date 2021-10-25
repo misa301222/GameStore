@@ -1,0 +1,47 @@
+<div [@fadeInOnEnter] class="container">
+
+  <div class="row align-items-start">
+    <div class="col">
+
+    </div>
+    <div class="col">
+
+    </div>
+    <div class="col">
+      Search data: <input type="text" class="form-control" placeholder="Search..." [(ngModel)]="filterTerm">
+    </div>
+
+  </div>
+
+  <table class="table">
+    <thead class="table-dark">
+      <tr>
+        <th scope="col">Full Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">UserName</th>
+        <th scope="col">Role</th>
+        <th scope="col">Funds</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of userList | filter:filterTerm">
+        <td>
+          {{ user.fullName }}
+        </td>
+        <td>
+          {{user.email}}
+        </td>
+        <td>
+          {{ user.userName}}
+        </td>
+        <td>
+          {{ user.roles.join(", ") }}
+        </td>
+        <td>
+          {{user.funds}}
+        </td>
+
+      </tr>
+    </tbody>
+  </table>
+</div>

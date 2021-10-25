@@ -1,0 +1,49 @@
+<div [@fadeInOnEnter] class="container">
+    <table class="table table-responsive table-hover table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col">Product ID</th>
+                <th scope="col">Product Name</th>
+                <th scope="col">Price</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let product of cartList">
+                <th scope="row">{{product.productId}}</th>
+                <td>{{product.productName}}</td>
+                <td class="text-center">{{product.price}}</td>
+                <td class="text-center">{{product.quantity}}</td>
+                <td>
+                    <button type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove From Cart" (click)="removeItem(product)" class="btn btn-danger btn-sm"><i
+                            class="bi bi-trash-fill"></i></button>
+
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="container">
+        <p *ngIf="grandTotal > 0" class="fw-bold">Total: {{grandTotal}}</p>
+    </div>
+
+    <div class="container text-center">
+        <button type="button" [disabled]="grandTotal < 1" (click)="shopNow(content)" class="btn btn-success btn-sm">Shop now!</button>
+    </div>
+</div>
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Success!</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+            <p> Purchase Successful!</p>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="modal.close()">OK!</button>
+    </div>
+</ng-template>

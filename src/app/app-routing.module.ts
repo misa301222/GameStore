@@ -1,33 +1,34 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AdminBoardComponent } from './admin-board/admin-board.component';
-import { AllUserManagmentComponent } from './all-user-managment/all-user-managment.component';
-import { BuyGameComponent } from './buy-game/buy-game.component';
-import { BuyProductComponent } from './buy-product/buy-product.component';
-import { CartComponent } from './cart/cart.component';
-import { CatalogComponent } from './catalog/catalog.component';
+import { AdminBoardComponent } from './Components/admin-board/admin-board.component';
+import { AllUserManagmentComponent } from './Components/all-user-managment/all-user-managment.component';
+import { BuyGameComponent } from './Components/Game/buy-game/buy-game.component';
+import { BuyProductComponent } from './Components/Product/buy-product/buy-product.component';
+import { CartComponent } from './Components/cart/cart.component';
+import { CatalogComponent } from './Components/catalog/catalog.component';
 import { AddCategoryComponent } from './Category/add-category/add-category.component';
 import { ShowCategoryComponent } from './Category/show-category/show-category.component';
-import { FundsComponent } from './funds/funds.component';
+import { FundsComponent } from './Components/funds/funds.component';
 
 
-import { RegisterGameComponent } from './Game/register-game/register-game.component';
-import { ShowGameComponent } from './Game/show-game/show-game.component';
+import { RegisterGameComponent } from './Components/Game/register-game/register-game.component';
+import { ShowGameComponent } from './Components/Game/show-game/show-game.component';
 import { AuthGuard } from './guards/auth.guard';
-import { HistoryComponent } from './history/history.component';
-import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
-import { AddProductComponent } from './Product/add-product/add-product.component';
-import { ShowProductComponent } from './Product/show-product/show-product.component';
-import { ProfileComponent } from './profile/profile.component';
-import { RegisterComponent } from './register/register.component';
-import { UserManagmentComponent } from './user-managment/user-managment.component';
+import { HistoryComponent } from './Components/history/history.component';
+import { HomeComponent } from './Components/home/home.component';
+import { LoginComponent } from './Components/login/login.component';
+import { AddProductComponent } from './Components/Product/add-product/add-product.component';
+import { ShowProductComponent } from './Components/Product/show-product/show-product.component';
+import { ProfileComponent } from './Components/profile/profile.component';
+import { RegisterComponent } from './Components/register/register.component';
+import { UserManagmentComponent } from './Components/user-managment/user-managment.component';
 
 const routes: Routes = [
+  { path: "", redirectTo: 'home', pathMatch: 'full' },
   { path: "register", component: RegisterComponent },
   { path: "login", component: LoginComponent },
   { path: "home", component: HomeComponent },
-  
+
   {
     path: "admin-board", component: AdminBoardComponent,
     canActivate: [AuthGuard],
@@ -63,12 +64,13 @@ const routes: Routes = [
       role: 'Admin'
     }
   },
-  { path: "user-managment", component: UserManagmentComponent, 
+  {
+    path: "user-managment", component: UserManagmentComponent,
     canActivate: [AuthGuard],
     data: {
       role: ['Admin', 'User']
     }
-   },
+  },
   {
     path: "all-user-managment", component: AllUserManagmentComponent,
     canActivate: [AuthGuard],
@@ -112,11 +114,7 @@ const routes: Routes = [
     }
   },
   {
-    path: "catalog/:categoryId", component: CatalogComponent,
-    canActivate: [AuthGuard],
-    data: {
-      role: ['Admin', 'User']
-    }
+    path: "catalog/:categoryId", component: CatalogComponent
   },
   {
     path: "funds", component: FundsComponent,

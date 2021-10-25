@@ -1,0 +1,83 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <form [formGroup]="fundsForm" (ngSubmit)="validateFunds()">
+                    <div class="mb-3 text-center">
+                        <div class="col">
+                            <i class="bi bi-cash-coin"></i>
+                        </div>
+                        <div class="col form-floating">
+                            <input type="number" placeholder="Add Funds" formControlName="funds" class="form-control"
+                                id="fundsInput">
+                            <label for="fundsInput">Add Funds</label>
+                        </div>
+
+                        <div class="col text-center">
+                            <button type="submit" class="btn btn-success">Confirm</button>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="fundsToAdd > 0" class="row justify-content-center" id="creditCardDiv">
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <form [formGroup]="cardForm" (ngSubmit)="onSubmit(content)">
+                    <div class="mb-3 text-center">
+                        <div class="col">
+                            <i class="bi bi-credit-card"></i>
+                            <i class="bi bi-credit-card-2-back"></i>
+                            <i class="bi bi-credit-card-2-back-fill"></i>
+                            <i class="bi bi-credit-card-2-front"></i>
+                            <i class="bi bi-credit-card-2-front-fill"></i>
+                        </div>
+
+                        <div class="col form-floating">
+                            <input type="text" mask='0000-0000-0000-0000'  placeholder="Card Number" formControlName="cardNumber"
+                                class="form-control" id="cardNumberInput">
+                            <label for="cardNumberInput">Card Number</label>
+                        </div>
+
+                        <div class="col form-floating">
+                            <input type="text" mask='00/00'  placeholder="Expiry Date" formControlName="expiryDate"
+                                class="form-control" id="expiryDateInput">
+                            <label for="expiryDateInput">Expiry Date</label>
+                        </div>
+
+                        <div class="col form-floating">
+                            <input type="text" mask='000'  placeholder="CCV/CVC" formControlName="ccv" class="form-control"
+                                id="ccvDateInput">
+                            <label for="ccvInput">CCV/CVC</label>
+                        </div>
+
+                        <div class="col text-center">
+                            <button type="submit" class="btn btn-success">Confirm</button>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Success!</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="goToProfile()">
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+            <p> Funds Added Succesfully!</p>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="goToProfile()">OK!</button>
+    </div>
+</ng-template>

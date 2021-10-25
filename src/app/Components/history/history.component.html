@@ -1,0 +1,45 @@
+<div [@fadeInOnEnter] class="container">
+
+    <div class="row align-items-start">
+        <div class="col">
+
+        </div>
+        <div class="col">
+
+        </div>
+        <div class="col">
+            Search data: <input type="text" class="form-control" placeholder="Search..." [(ngModel)]="filterTerm">
+        </div>
+
+    </div>
+
+    <table class="table table-responsive table-hover table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col">Product ID</th>
+                <th scope="col">Product Name</th>
+                <th scope="col">Price</th>
+                <th scope="col">Buy Date</th>
+                <th *ngIf="isAdmin" scope="col">Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let history of historyList | filter:filterTerm">
+                <th scope="row">{{history.productId}}</th>
+                <td>{{history.productName}}</td>
+                <td>${{history.price}}</td>
+                <td>{{history.buyDate}}</td>
+                <td *ngIf="isAdmin">{{history.email}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div *ngIf="isAdmin" class="container">
+        <p class="fw-bold text-decoration-underline"> Total gains: {{totalGains}} </p> 
+    </div>
+
+    <div *ngIf="!isAdmin" class="container">
+        <p class="fw-bold text-decoration-underline"> Total spendings: {{totalSpendings}} </p> 
+    </div>
+
+</div>

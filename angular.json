@@ -33,7 +33,8 @@
             "styles": [
               "src/styles.scss",
               "node_modules/datatables.net-dt/css/jquery.dataTables.css",
-              "node_modules/bootstrap-icons/font/bootstrap-icons.css"
+              "node_modules/bootstrap-icons/font/bootstrap-icons.css",
+              "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.js",

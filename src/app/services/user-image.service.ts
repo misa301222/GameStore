@@ -9,17 +9,25 @@ export class UserImageService {
 
   private readonly baseURL: string = "https://localhost:5001/api/UserImage";
 
-  constructor(private httpClient : HttpClient) { }
+  constructor(private httpClient: HttpClient) { }
 
-  saveImage(email : string, coverUrl : string) {
+  saveImage(email: string, coverUrl: string) {
     let body = {
-      Email : email,
-      CoverUrl : coverUrl
+      Email: email,
+      CoverUrl: coverUrl
     }
     return this.httpClient.post<UserImage>(this.baseURL + '/AddImage', body);
   }
 
-  getUserImageByEmail(email : string){
+  editImage(email: string, coverUrl: string) {
+    let body = {
+      Email: email,
+      CoverUrl: coverUrl
+    }
+    return this.httpClient.put<UserImage>(this.baseURL + '/' + email, body);
+  }
+
+  getUserImageByEmail(email: string) {
     return this.httpClient.get<UserImage>(this.baseURL + '/' + email);
   }
 

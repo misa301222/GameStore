@@ -1,0 +1,71 @@
+<div class="container datos">
+    <div class="row justify-content-center">
+        <div [@fadeInOnEnter] class="card shadow p-3 mb-5 bg-body rounded" style="width: 18rem;">
+            <div class="container text-center" *ngIf="userImage.coverUrl; else noImageFound">
+                <img src={{userImage.coverUrl}} class="card-img-top" alt="...">
+            </div>
+            <div class="card-body">
+                <h5 class="card-title text-center">{{user.fullName}}</h5>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><b>Email:</b> {{user.email}}</li>
+                <li class="list-group-item"><b>UserName:</b> {{user.userName}}</li>
+                <li class="list-group-item"><b>Roles:</b> {{ user.roles }} </li>
+                <li class="list-group-item"><b>Funds:</b> {{ user.funds }} </li>
+                <li class="list-group-item text-center"><button type="button" (click)="addFunds()"
+                        class="btn btn-primary">Add
+                        Funds</button></li>
+                <li class="list-group-item text-center"><button type="button" (click)="addImage(content)"
+                        class="btn btn-secondary">Add Cover Image</button></li>
+                <li class="list-group-item text-center"><button type="button" (click)="goToHistory()"
+                        class="btn btn-success">History</button></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<ng-template #noImageFound>
+    <div class="container text-center">
+        <img src="https://user-images.githubusercontent.com/24848110/33519396-7e56363c-d79d-11e7-969b-09782f5ccbab.png"
+            class="card-img-top profileImage" alt="...">
+    </div>
+</ng-template>
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Add Profile Image</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        </button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="addImageForm" (ngSubmit)="saveImage($event.submitter.id)">
+            <div class="card">
+                <div class="card-header">
+                    Data
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label for="inputEmail" class="form-label">Email</label>
+                        <input formControlName="email" type="text" class="form-control" id="inputEmail"
+                            placeholder="Email">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="inputCoverUrl" class="form-label">Cover Url</label>
+                        <input formControlName="coverUrl" type="text" class="form-control" id="inputCoverUrl"
+                            placeholder="Cover">
+                    </div>
+
+                    <div class="mb-3" style="text-align: center;">
+                        <button *ngIf="saveImageButton" id="saveButton" type="submit" class="btn btn-primary" [disabled]="!addImageForm.valid">Save
+                            Changes</button>
+                        <button *ngIf="editImageButton" id="editButton" type="submit" class="btn btn-primary" [disabled]="!addImageForm.valid">Edit
+                            Changes</button>
+
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </div>
+</ng-template>

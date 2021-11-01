@@ -1,0 +1,49 @@
+.container {
+    padding-top: 3em;
+
+    .questions-div {
+        padding-bottom: 5em;
+    }
+
+}
+
+.adminButton {
+    margin-bottom: 3em;
+}
+
+.btnDelete {
+    border-radius: 13px;
+}
+
+.background {
+    background-image: url("/assets/images/help.jpg");
+    background-size: cover;
+    height: 45em;
+
+    .header-contact {
+        height: 1.3em;
+    }
+
+    .box {
+        max-width: 30em;
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+        border-radius: 13px;
+        margin-top: 5em;
+        box-shadow: 0px 3px 3px gray;
+
+        hr {
+            color: white;
+            height: 2px;
+        }
+
+        p {
+            color: white;
+        }
+
+        li {
+            color: white;
+            list-style-type: none;
+        }
+    }
+}

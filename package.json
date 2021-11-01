@@ -24,6 +24,7 @@
     "angular-datatables": "^12.0.0",
     "bootstrap": "^5.1.0",
     "bootstrap-icons": "^1.5.0",
+    "canvas-confetti": "^1.4.0",
     "datatables.net": "^1.11.2",
     "datatables.net-dt": "^1.11.2",
     "ng2-search-filter": "^0.5.1",

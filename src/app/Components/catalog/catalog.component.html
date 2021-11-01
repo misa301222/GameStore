@@ -5,10 +5,10 @@
 
     <div class="row align-items-start">
         <div class="col">
-            
+
         </div>
         <div class="col">
-            
+
         </div>
         <div class="col">
             Search products: <input type="text" class="form-control" placeholder="Search..." [(ngModel)]="filterTerm">
@@ -18,7 +18,7 @@
 
     <hr>
     <div class="row row-cols-3">
-        <div class="col cards shadow p-3 mb-5 bg-body rounded" *ngFor="let product of productList | filter:filterTerm">
+        <div class="col cards rounded" *ngFor="let product of productList | filter:filterTerm">
             <div class="card">
 
                 <div class="card-header">
@@ -33,10 +33,15 @@
                 <div class="card-body text-center">
                     <p>{{ product.productName}}</p>
                     <p class="fw-bold">${{ product.price}}</p>
-                    <div class="availability" *ngIf="product.quantity > 0; else noAvailable">
+                    <div class="availability">
                         <button type="button" (click)="selectProduct(product.productId)"
-                            class="btn btn-success">Buy!</button>
+                            class="btn btn-success">Check!</button>
                     </div>
+
+                    <div class="availability-footer" *ngIf="product.quantity > 0; else noAvailable">
+
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -51,7 +56,7 @@
 </ng-template>
 
 <ng-template #noAvailable>
-    <div class="availability">
-        N/A
+    <div class="availability-footer">
+        <small> This product is not Available. Please wait until we restock.</small>
     </div>
 </ng-template>

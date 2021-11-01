@@ -22,13 +22,21 @@ import { ShowProductComponent } from './Components/Product/show-product/show-pro
 import { ProfileComponent } from './Components/profile/profile.component';
 import { RegisterComponent } from './Components/register/register.component';
 import { UserManagmentComponent } from './Components/user-managment/user-managment.component';
+import { ContactComponent } from './Components/contact/contact.component';
+import { HelpComponent } from './Components/help/help.component';
+import { TeamComponent } from './Components/team/team.component';
+import { SendApplicationComponent } from './Components/Application/send-application/send-application.component';
+import { ShowApplicationComponent } from './Components/Application/show-application/show-application.component';
 
 const routes: Routes = [
   { path: "", redirectTo: 'home', pathMatch: 'full' },
   { path: "register", component: RegisterComponent },
   { path: "login", component: LoginComponent },
   { path: "home", component: HomeComponent },
-
+  { path: "contact", component: ContactComponent },
+  { path: "help", component: HelpComponent },
+  { path: "team", component: TeamComponent },
+  { path: "send-application", component: SendApplicationComponent },
   {
     path: "admin-board", component: AdminBoardComponent,
     canActivate: [AuthGuard],
@@ -136,11 +144,20 @@ const routes: Routes = [
     data: {
       role: ['Admin', 'User']
     }
+  },
+  {
+    path: "show-application", component: ShowApplicationComponent,
+    canActivate: [AuthGuard],
+    data: {
+      role: ['Admin']
+    }
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+    scrollPositionRestoration: 'enabled'
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

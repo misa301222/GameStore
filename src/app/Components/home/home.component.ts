@@ -18,10 +18,11 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class HomeComponent implements OnInit {
 
+  constructor(private productService: ProductService, private router: Router, private gameService: GameService) { }
+
   products: Product[] = [];
   games: Game[] = [];
   rubberState = false;
-  constructor(private productService: ProductService, private router: Router, private gameService: GameService) { }
 
   ngOnInit(): void {
     this.getProducts();

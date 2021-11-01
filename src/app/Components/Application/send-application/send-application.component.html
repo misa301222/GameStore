@@ -1,0 +1,169 @@
+<div [@fadeInOnEnter] class="container">
+    <br>
+    <div class="header-application">
+        <p class="h2">Welcome to our Applications</p>
+        <br>
+    </div>
+    <form *ngIf="!applicationSent; else applicationSentAlready" [formGroup]="sendApplicationForm"
+        (ngSubmit)="sendApplication()" class="container">
+        <div class="card">
+            <div class="card-header fw-bold">
+                Application for Job
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <label for="emailInput" class="form-label">Email</label>
+                    <input *ngIf="!user" formControlName="email" name="email" type="text" class="form-control"
+                        id="emailInput" placeholder="Email">
+                    <input *ngIf="user" formControlName="email" name="email" type="text" class="form-control"
+                        id="emailInput">
+                </div>
+
+                <div class="mb-3">
+                    <label for="fullNameInput" class="form-label">Full Name</label>
+                    <input formControlName="fullName" name="fullName" type="text" class="form-control"
+                        id="fullNameInput" placeholder="Full Name">
+                </div>
+
+                <div class="mb-3">
+                    <label for="productIdInput" class="form-label">Phone Number</label>
+                    <input formControlName="phoneNumber" name="phoneNumber" type="text" class="form-control"
+                        id="phoneNumberInput" placeholder="Phone Number">
+                </div>
+
+                <div class="mb-3">
+                    <label for="addressInput" class="form-label">Address</label>
+                    <input formControlName="address" name="address" type="text" class="form-control" id="addressInput"
+                        placeholder="Address">
+                </div>
+
+                <div class="mb-3">
+                    <label for="scholarshipInput" class="form-label">Scholarship</label>
+                    <div class="form-check">
+                        <input formControlName="scholarship" class="form-check-input" type="radio" name="scholarship"
+                            id="exampleRadios1" value="School" checked>
+                        <label class="form-check-label" for="exampleRadios1">
+                            School
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input formControlName="scholarship" class="form-check-input" type="radio" name="scholarship"
+                            id="exampleRadios2" value="College">
+                        <label class="form-check-label" for="exampleRadios2">
+                            College
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input formControlName="scholarship" class="form-check-input" type="radio" name="scholarship"
+                            id="exampleRadios3" value="Degree">
+                        <label class="form-check-label" for="exampleRadios3">
+                            Degree
+                        </label>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="employmentDesiredInput" class="form-label">Employment Desired</label>
+                    <select formControlName="employmentDesired" name="employmentDesired" class="form-select"
+                        aria-label="Default select example" id="employmentDesiredInput"
+                        (change)="onChangeCategory($event)">
+                        <option [value]=0>Choose a Category</option>
+                        <option *ngFor="let job of jobList" [value]="job.jobId">{{
+                            job.jobId}} - {{ job.description
+                            }}
+                        </option>
+                    </select>
+                </div>
+
+                <div class="mb-3 text-center">
+                    <button type="submit" [disabled]="!sendApplicationForm.valid" class="btn btn-success">Send
+                        Application</button>
+                </div>
+
+            </div>
+        </div>
+    </form>
+</div>
+
+<ng-template #applicationSentAlready>
+    <div class="container">
+        <p class="fw-bold">
+            You already sent us an application. You can view it here!
+        </p>
+        <form [formGroup]="viewApplicationForm">
+            <div class="card">
+                <div class="card-header fw-bold">
+                    Application for Job
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label for="emailInput" class="form-label">Email</label>
+                        <input *ngIf="!user" formControlName="email" name="email" type="text" class="form-control"
+                            id="emailInput" placeholder="Email">
+                        <input *ngIf="user" formControlName="email" name="email" type="text" class="form-control"
+                            id="emailInput">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="fullNameInput" class="form-label">Full Name</label>
+                        <input formControlName="fullName" name="fullName" type="text" class="form-control"
+                            id="fullNameInput" placeholder="Full Name">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="productIdInput" class="form-label">Phone Number</label>
+                        <input formControlName="phoneNumber" name="phoneNumber" type="text" class="form-control"
+                            id="phoneNumberInput" placeholder="Phone Number">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="addressInput" class="form-label">Address</label>
+                        <input formControlName="address" name="address" type="text" class="form-control"
+                            id="addressInput" placeholder="Address">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="scholarshipInput" class="form-label">Scholarship</label>
+                        <input formControlName="scholarship" name="scholarship" type="text" class="form-control"
+                            id="scholarshipInput" placeholder="Scholarship">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="employmentDesiredInput" class="form-label">Employment Desired</label>
+                        <input formControlName="employmentDesired" name="employmentDesired" type="text" class="form-control"
+                            id="employmentDesiredInput" placeholder="Employment Desired">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="statusInput" class="form-label">Status</label>
+                        <input formControlName="status" name="status" type="text" class="form-control"
+                            id="statusInput" placeholder="Status">
+                    </div>
+
+                </div>
+            </div>
+        </form>
+
+
+        <div *ngIf="applicationStatus == 1" class="accepted-div">
+            <p class="fw-bold text-warning">
+               Your application is pending. Please wait patiently.
+            </p>
+        </div>
+
+        <div *ngIf="applicationStatus == 2" class="accepted-div">
+            <p class="fw-bold text-success">
+                It seems your application was accepted!! Please send an email with to admin@gmail.com to continue with the proccess!!!
+            </p>
+        </div>
+
+        <div *ngIf="applicationStatus == 3" class="accepted-div">
+            <p class="fw-bold text-danger">
+               Your application was rejected :(. Please try sending another one later.
+            </p>
+        </div>
+
+
+
+    </div>
+</ng-template>

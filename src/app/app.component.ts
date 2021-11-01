@@ -20,11 +20,13 @@ import { CategoryService } from './services/category.service';
 export class AppComponent {
   title = 'Store';
   categoryList: Category[] = [];
+  email: string = "";
 
-  constructor(private router: Router, private categoryService: CategoryService, private cartService : CartService) { }
+  constructor(private router: Router, private categoryService: CategoryService, private cartService: CartService) { }
 
   ngOnInit(): void {
     this.getCategories();
+    this.getEmail();
   }
 
   onLogout() {
@@ -50,6 +52,14 @@ export class AppComponent {
     return this.user.roles.indexOf("User") > -1 && !this.isAdmin;
   }
 
+  getEmail() {
+    if (this.user) {
+      this.email = this.user.email.toString();
+    } else {
+      this.email = null;
+    }
+  }
+
   getCategories() {
     return this.categoryService.getAllCategories().subscribe(data => {
       console.log(data);
@@ -59,7 +69,6 @@ export class AppComponent {
 
   selectCatalog(categoryId: number) {
     let url = '/catalog/' + categoryId;
-    //this.router.navigate(['/catalog/', categoryId]);
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
       this.router.navigate([url]));
   }

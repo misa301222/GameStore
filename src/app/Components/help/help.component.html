@@ -1,0 +1,72 @@
+<div [@fadeInOnEnter] class="container">
+    <div class="adminButton" *ngIf="isAdmin">
+        <button (click)="openNewHelpModal(content)" type="button" class="btn btn-secondary">Add New Help</button>
+    </div>
+
+    <div class="background">
+        <div class="container d-flex justify-content-center">
+            <div class="box text-center">
+                <p class="h2 header-contact">Help</p>
+                <hr>
+                <p class="h5">Here you can find frequently questions: </p>
+
+                <br>
+                <p class="h5">
+                    Please read carefully.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container questions-div">        
+        <p class="h2">Frequently Asked Questions</p>
+        <br>
+        <ul *ngFor="let help of helpList">
+            <li class="h5"> {{help.question}} <button *ngIf="isAdmin" type="button" (click)="deleteHelp(help.helpId)" class="btn btn-danger btn-sm btnDelete"><i
+                        class="bi bi-trash-fill"></i></button> </li>
+            <p class=""> {{help.answer}}</p>
+
+            <hr>
+        </ul>
+        <br>
+        <p class="h5">If you still have questions you can contact us <a routerLink="/contact">here.</a></p>
+
+    </div>
+
+</div>
+
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">New Help</h4>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="addHelpForm" (ngSubmit)="saveHelp()">
+            <div class="card">
+                <div class="card-header">
+                    Add Help
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label for="questionInput" class="form-label">Question</label>
+                        <input formControlName="question" name="question" type="text" class="form-control"
+                            id="questionInput" placeholder="Question">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="answerInput" class="form-label">Answer</label>
+                        <input formControlName="answer" name="answer" type="text" class="form-control" id="answerInput"
+                            placeholder="Answer">
+                    </div>
+
+                    <div class="mb-3" style="text-align: center;">
+                        <button type="submit" class="btn btn-success">Save</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary">Close</button>
+    </div>
+</ng-template>

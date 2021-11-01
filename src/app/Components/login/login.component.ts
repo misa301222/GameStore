@@ -31,19 +31,26 @@ export class LoginComponent implements OnInit {
     let password = this.loginForm.controls["password"].value;
     this.userService.login(email, password).subscribe((data: any) => {
       console.log("data: " + data.dataSet);
-      if (data.responseCode == 1) {
-        this.toastr.success('You have been logged in!', 'Login.', {
-          positionClass: 'toast-top-center'
-        })
-        localStorage.setItem(Constants.USER_KEY, JSON.stringify(data.dataSet));
-        localStorage.setItem('EMAIL', email);
-        let user = data.dataSet as User;
-        if (user.roles.indexOf("Admin") > -1) {
-          this.router.navigate(["/home"]);
-        } else {
-          this.router.navigate(["/home"]);
-        }
-        this.authService.login(user.roles.toString());
+      switch (data.responseCode) {
+        case 1:
+          this.toastr.success('You have been logged in!', 'Login.', {
+            positionClass: 'toast-top-center'
+          })
+          localStorage.setItem(Constants.USER_KEY, JSON.stringify(data.dataSet));
+          localStorage.setItem('EMAIL', email);
+          let user = data.dataSet as User;
+          if (user.roles.indexOf("Admin") > -1) {
+            this.router.navigate(["/home"]);
+          } else {
+            this.router.navigate(["/home"]);
+          }
+          this.authService.login(user.roles.toString());
+          break;
+        case 2:
+          this.toastr.error('Invalid Username or Password Please check the data!', 'Login.', {
+            positionClass: 'toast-top-center'
+          })
+          break;
       }
       console.log("response", data);
     }, error => {

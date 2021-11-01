@@ -1,3 +1,10 @@
 .container{
     padding-top: 3em;
+    padding-bottom: 10em;
+}
+
+@media (max-width: 991px) {
+    .btn {
+        border-radius: 15px;
+    }
 }

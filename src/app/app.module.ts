@@ -31,6 +31,11 @@ import { CatalogComponent } from './Components/catalog/catalog.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxMaskModule } from 'ngx-mask';
+import { ContactComponent } from './Components/contact/contact.component';
+import { HelpComponent } from './Components/help/help.component';
+import { TeamComponent } from './Components/team/team.component';
+import { SendApplicationComponent } from './Components/Application/send-application/send-application.component';
+import { ShowApplicationComponent } from './Components/Application/show-application/show-application.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +58,12 @@ import { NgxMaskModule } from 'ngx-mask';
     BuyGameComponent,
     CartComponent,
     HistoryComponent,
-    CatalogComponent
+    CatalogComponent,
+    ContactComponent,
+    HelpComponent,
+    TeamComponent,
+    SendApplicationComponent,
+    ShowApplicationComponent
   ],
   imports: [
     BrowserModule,

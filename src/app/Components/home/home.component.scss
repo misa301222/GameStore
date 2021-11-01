@@ -8,18 +8,49 @@ $filter: blur(5px);
 
 .cards {
     padding-bottom: 3em;
-    //background-color: $glass-color;
-    //color: $filter;
 }
 
 .container {
     padding-top: 3em;
-    //background-color: #495464;
+    //background-image: url(/assets/images/flower-background.jpg);
+}
+
+.card-header {
+    text-align: center;
+    font-weight: bold;
 }
 
 .title {
-    //background: rgb(255, 255, 255);
     border-radius: 25px;
     background: rgb(255, 255, 255);
     background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(186, 186, 205, 1) 71%);
+}
+
+.card-body {
+    height: 10em;
+}
+/*
+@supports (backdrop-filter: blur(5px)) {
+    .card, .title{
+        background: rgba(255,255,255,.2);
+        //background: rgba(0, 0, 0, 0.5);
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+    }
+}
+*/
+
+@media (max-width: 991px) {
+    .coverImage {
+        height: 4em;
+        width: 5em;
+    }
+
+    .card-body {
+        height: 12em;
+    }
+
+    .btn {
+        border-radius: 15px;
+    }
 }

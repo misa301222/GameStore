@@ -1,0 +1,74 @@
+.container {
+    padding-top: 3em;
+    padding-bottom: 3em;
+}
+
+.background {
+    background-image: url("/assets/images/team.jpg");
+    height: 45em;
+}
+
+.box {
+    max-width: 30em;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border-radius: 13px;
+    margin-top: 5em;
+    box-shadow: 0px 3px 3px burlywood;
+
+    hr {
+        color: white;
+        height: 2px;
+    }
+
+    p {
+        color: white;
+    }
+
+    li {
+        color: white;
+        list-style-type: none;
+    }
+}
+
+.nav-lateral {
+    padding-top: 3em;
+
+    .nav-pills {
+        .nav-link.active {
+            background-color: #495464;
+            color: white;
+        }
+
+        .nav-link {
+            color: black;
+            //background-color: #495464;
+        }
+    }
+}
+
+.container-tab{
+    width: 73em;    
+    //background: red;
+    li {
+        list-style-type: none;
+    }
+
+    .card{
+        width: 35em;
+        margin: 0 auto;
+    }
+
+    .container-question{
+        .btn {
+            border-radius: 13px;
+        }
+    }
+
+}
+
+.thumbnail{
+    margin-top: 3em;
+    width: 30em;
+    border-radius: 13px;
+}

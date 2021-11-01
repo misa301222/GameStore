@@ -27,3 +27,49 @@ a.disabled {
         background-color: #495464;
     }
 }
+
+footer {
+    margin-top: 3em;
+    background-color: #495464; 
+    p, h6 {
+        color: white;
+    }
+
+    li {
+        list-style-type: none;
+    }
+
+    a{
+        color: #d9dee4;
+        text-decoration: none;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    a:hover{
+        color: #4372b6;
+    }
+
+    hr{
+        color: white;
+    }
+}
+
+.profile-nav {
+    cursor: pointer;
+
+    a {
+        color: white;
+        font-weight: bold;
+    }
+}
+
+.profile-nav:hover {
+    background-color: #9697aa;
+}
+
+@media (max-width: 991px) {
+    .btn {
+        border-radius: 15px;
+    }
+}

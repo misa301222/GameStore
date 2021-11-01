@@ -1,9 +1,10 @@
 .container {
-    padding-top: 3em;
+  padding-top: 3em;
+  padding-bottom: 25em;
 }
 
-#creditCardDiv{
-    padding-top: 5em;
+#creditCardDiv {
+  padding-top: 5em;
 }
 
 /* Chrome, Safari, Edge, Opera */
@@ -14,6 +15,6 @@ input::-webkit-inner-spin-button {
 }
 
 /* Firefox */
-input[type=number] {
+input[type="number"] {
   -moz-appearance: textfield;
 }

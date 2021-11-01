@@ -16,3 +16,20 @@
     background: rgb(255, 255, 255);
     background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(186, 186, 205, 1) 71%);
 }
+
+
+@media (max-width: 991px) {
+    .coverImage {
+        height: 4em;
+        width: 5em;
+    }
+
+    .card-body {
+        height: 12em;
+    }
+
+    .btn {
+        border-radius: 15px;
+    }
+}
+

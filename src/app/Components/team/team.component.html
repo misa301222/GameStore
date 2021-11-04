@@ -22,7 +22,7 @@
                 <ng-template ngbNavContent>
                     <div class="container-tab">
                         <p class="h3">Software Development</p>
-                        <img class="thumbnail" src="/assets/images/code.jpg" alt="Code">
+                        <img (mouseover)="toggle()" (mouseleave)="toggleMouseLeave()" [@makeImageBigger]="isImageBig ? 'big' : 'normal'" class="thumbnail" src="/assets/images/code.jpg" alt="Code">
                         <br><br>
                         <p class="h5"> If you are good with numbers and code you should check out the requirements. </p>
                         <br>
@@ -59,7 +59,7 @@
                 <ng-template ngbNavContent>
                     <div class="container-tab">
                         <p class="h3">Marketing Team</p>
-                        <img class="thumbnail" src="/assets/images/marketing.jpg" alt="Code">
+                        <img (mouseover)="toggle()" (mouseleave)="toggleMouseLeave()" [@makeImageBigger]="isImageBig ? 'big' : 'normal'" class="thumbnail" src="/assets/images/marketing.jpg" alt="Code">
                         <br><br>
                         <p class="h5"> If you are good with people and money managment you should check out the
                             requirements. </p>
@@ -97,7 +97,7 @@
                 <ng-template ngbNavContent>
                     <div class="container-tab">
                         <p class="h3">Administrative Team</p>
-                        <img class="thumbnail" src="/assets/images/administrative.jpg" alt="Code">
+                        <img (mouseover)="toggle()" (mouseleave)="toggleMouseLeave()" [@makeImageBigger]="isImageBig ? 'big' : 'normal'" class="thumbnail" src="/assets/images/administrative.jpg" alt="Code">
                         <br><br>
                         <p class="h5"> If you are good with administrative tools you should check out the requirements.
                         </p>

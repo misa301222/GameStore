@@ -6,6 +6,7 @@
 .background {
     background-image: url("/assets/images/team.jpg");
     height: 45em;
+    border-radius: 13px;
 }
 
 .box {
@@ -47,28 +48,38 @@
     }
 }
 
-.container-tab{
-    width: 73em;    
+.container-tab {
+    width: 73em;
     //background: red;
     li {
         list-style-type: none;
     }
 
-    .card{
+    .card {
         width: 35em;
         margin: 0 auto;
     }
 
-    .container-question{
+    .container-question {
         .btn {
             border-radius: 13px;
         }
     }
-
 }
 
-.thumbnail{
+.thumbnail {
     margin-top: 3em;
     width: 30em;
     border-radius: 13px;
+}
+
+@media (max-width: 991px) {
+    .container-tab {
+        width: 30em;
+
+        .card {
+            width: 20em;
+            margin: 0 auto;
+        }
+    }
 }

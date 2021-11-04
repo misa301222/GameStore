@@ -38,7 +38,7 @@ export class ProfileComponent implements OnInit {
 
   getCurrentUser() {
     this.userService.getCurrentUser().subscribe((data: User) => {
-      console.log(data);
+
       this.user = data;
       let em = this.user.email.replace(/['"]+/g, '');
       this.getUserImage(em);
@@ -51,7 +51,7 @@ export class ProfileComponent implements OnInit {
       this.editImageButton = true;
     }, err => {
       if (err.status == 404) {
-        console.log('User image not found');
+
         this.saveImageButton = true;
       }
     });
@@ -72,12 +72,12 @@ export class ProfileComponent implements OnInit {
     let email = this.addImageForm.controls['email'].value;
     let coverUrl = this.addImageForm.controls['coverUrl'].value;
     let eventName = event.toString();
-    console.log('eventName: ' + eventName);
+
 
     switch (eventName) {
       case "saveButton":
         this.userImageService.saveImage(email, coverUrl).subscribe(data => {
-          console.log(JSON.stringify(data));
+
           this.modalService.dismissAll();
           this.toastr.success('Image saved successfully', 'Image', {
             positionClass: 'toast-top-center'

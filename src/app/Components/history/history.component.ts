@@ -43,7 +43,7 @@ export class HistoryComponent implements OnInit {
 
   getAllByEmail(email: string) {
     return this.historyService.getAllProductByEmail(email).subscribe(data => {
-      console.log(data);
+      
       this.historyList = data;
       this.totalSpendings = this.historyList.reduce((acumulator, current) => acumulator + current.price, 0);
     })

@@ -35,7 +35,7 @@ export class CartComponent implements OnInit {
 
   getCurrentUser() {
     this.userService.getCurrentUser().subscribe((data: User) => {
-      console.log(data);
+
       this.user = data;
     });
   }
@@ -85,7 +85,8 @@ export class CartComponent implements OnInit {
           break;
 
         case 2:
-          this.toastr.error('Info', data.responseMessage, {
+          this.toastr.error(data.responseMessage, 'Funds', {
+            positionClass: 'toast-top-center',
             timeOut: 3000
           });
           break;
@@ -95,13 +96,13 @@ export class CartComponent implements OnInit {
 
   saveHistory(productId: number, productName: string, price: number, email: string, buyDate: string) {
     return this.historyService.saveProduct(productId, productName, price, email, buyDate).subscribe(data => {
-      console.log(JSON.stringify(data));
+
     })
   }
 
   updateQuantityProduct(productId: number, quantity: number) {
     return this.productService.updateProductQuantity(productId, quantity).subscribe(data => {
-      console.log(JSON.stringify(data));
+
     })
   }
 

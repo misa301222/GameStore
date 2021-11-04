@@ -12,5 +12,9 @@ canvas {
     width: 100%;
 }
 
-.container {
+.background {
+    background-image: url('/assets/images/work.jpg');
+    background-size: cover;
+    height: 50em;
+    border-radius: 13px;
 }

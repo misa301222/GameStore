@@ -37,7 +37,7 @@ export class UserService {
   public getAllUsers() {
 
     let userInfo = JSON.parse(localStorage.getItem(Constants.USER_KEY));
-    console.log(userInfo);
+    
     const headers = new HttpHeaders({
       "Authorization": `Bearer ${userInfo?.token}`
     })
@@ -58,7 +58,7 @@ export class UserService {
   public GetUserList() {
 
     let userInfo = JSON.parse(localStorage.getItem(Constants.USER_KEY));
-    console.log(userInfo);
+    
     const headers = new HttpHeaders({
       "Authorization": `Bearer ${userInfo?.token}`
     })
@@ -79,11 +79,11 @@ export class UserService {
   public getAllRole() {
 
     let userInfo = JSON.parse(localStorage.getItem(Constants.USER_KEY));
-    console.log(userInfo);
+    
     const headers = new HttpHeaders({
       "Authorization": `Bearer ${userInfo?.token}`
     })
-    //console.log("arriba return");
+    //
     return this.httpClient.get<ResponseModel>(this.baseURL + "/GetRoles", { headers: headers }).pipe(map((res: any) => {
       let roleList = new Array<Role>();
       if (res.responseCode == 1) {

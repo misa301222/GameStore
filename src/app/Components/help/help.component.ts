@@ -30,7 +30,7 @@ export class HelpComponent implements OnInit {
 
   getAllHelp() {
     return this.helpService.getAllHelp().subscribe(data => {
-      console.log('data: ' + JSON.stringify(data))
+      
       this.helpList = data;
     })
   }
@@ -54,9 +54,9 @@ export class HelpComponent implements OnInit {
     this.modalService.open(content);
   }
 
-  deleteHelp(helpId: number){
+  deleteHelp(helpId: number) {
     return this.helpService.deleteHelp(helpId).subscribe(data => {
-      console.log(JSON.stringify(data));
+      
       this.toastr.info('Help Deleted Successfully!', 'Help.', {
         positionClass: 'toast-top-center'
       })
@@ -74,7 +74,11 @@ export class HelpComponent implements OnInit {
   }
 
   get isAdmin(): boolean {
-    return this.user.roles.indexOf("Admin") > -1;
+    if (this.user) {
+      return this.user.roles.indexOf("Admin") > -1;
+    } else {
+      return false;
+    }
   }
 
 }

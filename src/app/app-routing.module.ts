@@ -27,6 +27,7 @@ import { HelpComponent } from './Components/help/help.component';
 import { TeamComponent } from './Components/team/team.component';
 import { SendApplicationComponent } from './Components/Application/send-application/send-application.component';
 import { ShowApplicationComponent } from './Components/Application/show-application/show-application.component';
+import { AboutThisAppComponent } from './Components/about-this-app/about-this-app.component';
 
 const routes: Routes = [
   { path: "", redirectTo: 'home', pathMatch: 'full' },
@@ -37,6 +38,9 @@ const routes: Routes = [
   { path: "help", component: HelpComponent },
   { path: "team", component: TeamComponent },
   { path: "send-application", component: SendApplicationComponent },
+  { path: "catalog/:categoryId", component: CatalogComponent },
+  { path: "Product/buy-product/:productId", component: BuyProductComponent },
+  { path: "about-this-app", component: AboutThisAppComponent },
   {
     path: "admin-board", component: AdminBoardComponent,
     canActivate: [AuthGuard],
@@ -108,21 +112,11 @@ const routes: Routes = [
     }
   },
   {
-    path: "Product/buy-product/:productId", component: BuyProductComponent,
-    canActivate: [AuthGuard],
-    data: {
-      role: ['Admin', 'User']
-    }
-  },
-  {
     path: "Game/buy-game/:idGame", component: BuyGameComponent,
     canActivate: [AuthGuard],
     data: {
       role: ['Admin', 'User']
     }
-  },
-  {
-    path: "catalog/:categoryId", component: CatalogComponent
   },
   {
     path: "funds", component: FundsComponent,

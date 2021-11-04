@@ -3,11 +3,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { fadeInUpOnEnterAnimation } from 'angular-animations';
+import { fadeInUpOnEnterAnimation, jelloAnimation, swingAnimation, tadaAnimation } from 'angular-animations';
 import { ToastrService } from 'ngx-toastr';
+import { Constants } from 'src/app/Helper/constants';
 import { Product } from 'src/app/Models/product';
 import { Review } from 'src/app/Models/review';
 import { ReviewLike } from 'src/app/Models/reviewLike';
+import { User } from 'src/app/Models/user';
 import { CartService } from 'src/app/services/cart.service';
 import { HistoryService } from 'src/app/services/history.service';
 import { ProductService } from 'src/app/services/product.service';
@@ -20,7 +22,9 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './buy-product.component.html',
   styleUrls: ['./buy-product.component.scss'],
   animations: [
-    fadeInUpOnEnterAnimation()
+    fadeInUpOnEnterAnimation(),
+    jelloAnimation(),
+    tadaAnimation()
   ]
 })
 export class BuyProductComponent implements OnInit {
@@ -32,14 +36,16 @@ export class BuyProductComponent implements OnInit {
   reviewList: Review[] = [];
   selectedProduct: Product = new Product();
   email: string;
-  isRated = false;
+  isRated: boolean = false;
   reviewLikeList: ReviewLike[] = [];
-  reviewAlreadyWrote = false;
-  reviewIdToDelete = -1;
-  isVerified = false;
-  quantityLeft = 0;
-  rate = 4;
-
+  reviewAlreadyWrote: boolean = false;
+  reviewIdToDelete: number = -1;
+  isVerified: boolean = false;
+  quantityLeft: number = 0;
+  rate: number = 4;
+  productRate: number = 0;
+  isJello: boolean = false;
+  isTada: boolean = false;
 
   public addReviewForm = this.formBuilder.group({
     title: ['', [Validators.required]],
@@ -50,13 +56,22 @@ export class BuyProductComponent implements OnInit {
 
   ngOnInit(): void {
     this.getProductById(Number(this.route.snapshot.paramMap.get('productId')));
-    this.email = this.getUserEmail();
-    this.getLikesByEmailAndReviewId(this.email);
+    if (this.isUserLogin) {
+      this.email = this.getUserEmail();
+      this.getLikesByEmailAndReviewId(this.email);
+    }
+  }
+
+  toggleJello() {
+    this.isJello = !this.isJello;
+  }
+
+  toggleTada() {
+    this.isTada = !this.isTada;
   }
 
   getProductById(productId: number) {
     this.productService.getProductById(productId).subscribe(data => {
-      console.log(JSON.stringify(data));
       this.selectedProduct = data;
     })
 
@@ -77,11 +92,13 @@ export class BuyProductComponent implements OnInit {
 
   getUserEmail() {
     return this.userService.getEmail();
-  }  
+  }
 
   getReviewsByProductId(productId: number) {
     return this.reviewService.getReviewsByProductId(productId).subscribe(data => {
       this.reviewList = data;
+      let stars = data.reduce((accumulator, current) => accumulator + current.stars, 0) / this.reviewList.length;
+      this.productRate = stars > 0 ? stars : 0;
     })
   }
 
@@ -100,7 +117,6 @@ export class BuyProductComponent implements OnInit {
 
   reviewExists(productId: number) {
     return this.reviewService.verifyReview(this.email, productId).subscribe(data => {
-      console.log('Exists: ' + data);
       this.reviewAlreadyWrote = data;
       this.verifiedPurchase(productId);
     })
@@ -115,7 +131,6 @@ export class BuyProductComponent implements OnInit {
 
   getQuantityCalculatedInCart(productId: number) {
     this.quantityLeft = this.selectedProduct.quantity - this.cartService.getQuantityOfProduct(productId);
-    console.log(this.quantityLeft);
   }
 
   saveReview() {
@@ -128,7 +143,6 @@ export class BuyProductComponent implements OnInit {
     let reviewDate = this.datePipe.transform(date, 'yyyy-MM-dd hh:mm:ss');
 
     return this.reviewService.saveReview(this.selectedProduct.productId, this.email, title, description, stars, verifiedPurchase, usefulCount, reviewDate).subscribe(data => {
-      console.log(JSON.stringify(data));
       this.toastr.success('Review Submitted Successfully', 'Review', {
         positionClass: 'toast-top-center'
       })
@@ -169,7 +183,6 @@ export class BuyProductComponent implements OnInit {
 
   saveLike(reviewId: number, email: string, likeValue: number) {
     return this.reviewLikeService.saveLike(reviewId, email, likeValue).subscribe(data => {
-      console.log(JSON.stringify(data));
       this.getLikesByEmailAndReviewId(this.email);
     })
   }
@@ -188,8 +201,6 @@ export class BuyProductComponent implements OnInit {
 
   getLikesByEmailAndReviewId(email: string) {
     return this.reviewLikeService.getLikesByEmailAndReviewId(email, 1).subscribe(data => {
-      //this.reviewLikeList.push(data);
-      console.log(JSON.stringify(data));
       this.reviewLikeList = data;
       this.updateUsefulCount(this.selectedProduct.productId, this.email);
     })
@@ -218,7 +229,6 @@ export class BuyProductComponent implements OnInit {
   }
 
   deleteOwnReview() {
-    console.log('Id: ' + this.reviewIdToDelete);
     return this.reviewLikeService.deleteReviewLike(this.reviewIdToDelete).subscribe(data => {
       this.deleteReview(this.reviewIdToDelete);
     })
@@ -232,6 +242,15 @@ export class BuyProductComponent implements OnInit {
         positionClass: 'toast-top-center'
       })
     });
+  }
+
+  get isUserLogin() {
+    const user = localStorage.getItem(Constants.USER_KEY);
+    return user && user.length > 0;
+  }
+
+  get user(): User {
+    return JSON.parse(localStorage.getItem(Constants.USER_KEY));
   }
 
 }

@@ -1,7 +1,14 @@
 <div [@fadeInUpOnEnter] class="container">
-    <div class="card p-3 mb-5 bg-body rounded">
+
+    <div *ngIf="!isUserLogin" class="not-logged-in text-center">
+        <p class="fw-bold text-decoration-underline fst-italic text-danger"> You are currently not logged in! If you
+            want to
+            purchase you must login. If you want to login click <a routerLink="/login">here.</a></p>
+    </div>
+
+    <div [@jello]="!isJello" class="card p-3 mb-5 bg-body rounded">
         <div class="shadow row g-0">
-            <div class="card-header">
+            <div class="card-header" (click)="toggleJello()">
                 {{selectedProduct.productName}}
             </div>
 
@@ -15,9 +22,21 @@
                 </div>
             </div>
             <div class="card-footer text-end">
-                <small class="text-danger fw-bold text-restock" *ngIf="quantityLeft < 1">Oops! It seems there's not more products available. Please wait for restock!</small>
-                <button [disabled]="quantityLeft <= 0" type="button" class="btn btn-success" (click)="addToCart(selectedProduct, content)">Buy
+                <small class="text-danger fw-bold text-restock" *ngIf="quantityLeft < 1">Oops! It seems there's not more
+                    products available. Please wait for restock!</small>
+                <button [disabled]="quantityLeft <= 0 || !isUserLogin" type="button" class="btn btn-success"
+                    (click)="addToCart(selectedProduct, content)">Buy
                     Now!</button>
+            </div>
+        </div>
+    </div>
+
+    <div [@tada]="!isTada" (click)="toggleTada()" class="card p-3 mb-5 bg-body rounded">
+        <div class="shadow row g-0">
+            <div class="card-body">
+                <p class="fw-bold">Review Summary:</p>
+                <ngb-rating [(rate)]="productRate" [max]="5" [readonly]="true">
+                </ngb-rating> ({{productRate}})
             </div>
         </div>
     </div>
@@ -37,8 +56,11 @@
 
                 <div class="d-flex w-100 justify-content-between">
                     <small class="fw-bold text-decoration-underline">{{review.email}} </small>
-                    <small *ngIf="review.verifiedPurchase" class="fw-bold text-decoration-underline fst-italic verified-text"> Verified purchase! </small>
-                    <small *ngIf="!review.verifiedPurchase" class="fw-bold text-decoration-underline fst-italic not-verified-text"> Purchase not verified </small>
+                    <small *ngIf="review.verifiedPurchase"
+                        class="fw-bold text-decoration-underline fst-italic verified-text"> Verified purchase! </small>
+                    <small *ngIf="!review.verifiedPurchase"
+                        class="fw-bold text-decoration-underline fst-italic not-verified-text"> Purchase not verified
+                    </small>
                 </div>
                 <br>
                 <p class="mb-1 fst-italic">Review: <br>{{review.description}}</p>
@@ -48,20 +70,20 @@
                 <small>Was this review useful?</small>
                 <form class="like-form" [ngSwitch]="calculate(review.id)"
                     (ngSubmit)="verifyLike(review.id, $event.submitter.id, $event.submitter.value)">
-                    <button *ngSwitchCase="1" type="submit" id="like" value=0 class="btn btn-success btn-sm"><i
-                            class="bi bi-hand-thumbs-up-fill"></i></button>
-                    <button *ngSwitchCase="1" type="submit" id="dislike" value=-1
+                    <button [disabled]="!isUserLogin" *ngSwitchCase="1" type="submit" id="like" value=0
+                        class="btn btn-success btn-sm"><i class="bi bi-hand-thumbs-up-fill"></i></button>
+                    <button [disabled]="!isUserLogin" *ngSwitchCase="1" type="submit" id="dislike" value=-1
                         class="btn btn-outline-danger btn-sm"><i class="bi bi-hand-thumbs-down"></i></button>
 
-                    <button *ngSwitchCase="0" type="submit" value=1 id="like" class="btn btn-outline-success btn-sm"><i
-                            class="bi bi-hand-thumbs-up"></i></button>
-                    <button *ngSwitchCase="0" type="submit" value=-1 id="dislike"
-                        class="btn btn-outline-danger btn-sm"><i class="bi bi-hand-thumbs-down"></i></button>
-
-                    <button *ngSwitchCase="-1" type="submit" id="like" value="1"
+                    <button [disabled]="!isUserLogin" *ngSwitchCase="0" type="submit" value=1 id="like"
                         class="btn btn-outline-success btn-sm"><i class="bi bi-hand-thumbs-up"></i></button>
-                    <button *ngSwitchCase="-1" type="submit" id="dislike" value="0" class="btn btn-danger btn-sm"><i
-                            class="bi bi-hand-thumbs-down-fill"></i></button>
+                    <button [disabled]="!isUserLogin" *ngSwitchCase="0" type="submit" value=-1 id="dislike"
+                        class="btn btn-outline-danger btn-sm"><i class="bi bi-hand-thumbs-down"></i></button>
+
+                    <button [disabled]="!isUserLogin" *ngSwitchCase="-1" type="submit" id="like" value="1"
+                        class="btn btn-outline-success btn-sm"><i class="bi bi-hand-thumbs-up"></i></button>
+                    <button [disabled]="!isUserLogin" *ngSwitchCase="-1" type="submit" id="dislike" value="0"
+                        class="btn btn-danger btn-sm"><i class="bi bi-hand-thumbs-down-fill"></i></button>
 
                 </form>
                 <div class="mb-3 text-end">
@@ -75,7 +97,8 @@
 
     <hr>
 
-    <form [formGroup]="addReviewForm" (ngSubmit)="onSubmit()" class="container addReviewForm">
+    <form *ngIf="isUserLogin; else pleaseLogin" [formGroup]="addReviewForm" (ngSubmit)="onSubmit()"
+        class="container addReviewForm">
         <div class="card">
             <div class="card-header text-center">
                 <p class="h4">Add Your Own Review</p>
@@ -122,6 +145,14 @@
 <ng-template #noReviews>
     <div class="container">
         <p class="h3 text-center"> No reviews! Be the first one!</p>
+    </div>
+</ng-template>
+
+<ng-template #pleaseLogin>
+    <div class="container">
+        <p class="h3 text-center"> Whoops! It seems you are not currently logged in!! If you want to leave a Review
+            please Log in <a routerLink="/login">here.</a></p>
+        <br>
     </div>
 </ng-template>
 

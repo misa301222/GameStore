@@ -12,7 +12,6 @@ $filter: blur(5px);
 
 .container {
     padding-top: 3em;
-    //background-image: url(/assets/images/flower-background.jpg);
 }
 
 .card-header {
@@ -29,16 +28,6 @@ $filter: blur(5px);
 .card-body {
     height: 10em;
 }
-/*
-@supports (backdrop-filter: blur(5px)) {
-    .card, .title{
-        background: rgba(255,255,255,.2);
-        //background: rgba(0, 0, 0, 0.5);
-        -webkit-backdrop-filter: blur(10px);
-        backdrop-filter: blur(10px);
-    }
-}
-*/
 
 @media (max-width: 991px) {
     .coverImage {

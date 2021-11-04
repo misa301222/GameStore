@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg">
   <div class="container-fluid">
-    <a routerLink="/home" class="navbar-brand"><i class="bi bi-shop"></i> Store</a>
+    <a [@bounce]="isBouncing[0]" (click)="toggleBouncing(0)" routerLink="/home" class="navbar-brand"><i class="bi bi-shop"></i> Store</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"><i class="bi bi-arrows-angle-expand"></i></span>
@@ -14,34 +14,35 @@
           <a class="nav-link" *ngIf="!isUserLogin" routerLink="/register">Register</a>
         </li>
 
-        <li class="nav-item rounded profile-nav">
+        <li class="nav-item rounded profile-nav" [@bounce]="isBouncing[1]" (click)="toggleBouncing(1)">
           <a class="nav-link" *ngIf="isUserLogin" routerLink="/profile">{{email}}</a>
         </li>
 
-        <li class="nav-item">
+        <li class="nav-item" [@bounce]="isBouncing[2]" (click)="toggleBouncing(2)">
           <a class="nav-link" routerLink="/home">Home</a>
         </li>
 
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+        <li class="nav-item dropdown" (click)="toggleBouncing(4)">
+          <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
             aria-expanded="false">
             Explore
           </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <ul [@bounce]="isBouncing[4]" class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li *ngFor="let category of categoryList"> <a class="dropdown-item"
                 (click)="selectCatalog(category.categoryId)"><i class="bi bi-bag-dash"></i>
                 {{category.categoryName}}s</a> </li>
           </ul>
         </li>
 
-        <li class="nav-item dropdown" *ngIf="isUserLogin">
+        <li class="nav-item dropdown" *ngIf="isUserLogin" (click)="toggleBouncing(5)">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
             aria-expanded="false">
             Account
           </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <ul [@bounce]="isBouncing[5]"  class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item" routerLink="/profile"><i class="bi bi-person-square"></i> My profile</a></li>
-            <li><a class="dropdown-item" routerLink="/send-application"><i class="bi bi-briefcase-fill"></i> Application</a></li>
+            <li><a class="dropdown-item" routerLink="/send-application"><i class="bi bi-briefcase-fill"></i>
+                Application</a></li>
             <li><a class="dropdown-item" routerLink="/history"><i class="bi bi-clock-history"></i> History</a></li>
             <li><a class="dropdown-item" *ngIf="isUserLogin && isAdmin" routerLink="/admin-board"><i
                   class="bi bi-tools"></i> Admin Tools</a></li>
@@ -55,7 +56,7 @@
           </ul>
         </li>
 
-        <li class="nav-item">
+        <li class="nav-item" [@bounce]="isBouncing[3]" (click)="toggleBouncing(3)">
           <a class="nav-link" *ngIf="isUserLogin" routerLink="/cart">Cart</a>
         </li>
 
@@ -80,7 +81,9 @@
 
       <!-- Grid column -->
       <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-        <h6 class="text-uppercase mb-4 font-weight-bold">misa301222</h6>
+        <a routerLink="/about-this-app">
+          <h6 class="text-uppercase mb-4 font-weight-bold">misa301222</h6>
+        </a>
         <p>Store using Angular 12 and .NET 5
         </p>
       </div>
@@ -91,7 +94,7 @@
       <!-- Grid column -->
       <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
         <h6 class="text-uppercase mb-4 font-weight-bold">Products</h6>
-        <li *ngFor="let category of categoryList" class="footer-list">
+        <li *ngFor="let category of categoryListFooter" class="footer-list">
           <a (click)="selectCatalog(category.categoryId)">
             {{category.categoryName}}s
           </a>
@@ -152,8 +155,7 @@
 
         <!--Copyright-->
         <p class="text-center text-md-left">© 2021 Copyright:
-          <strong> misa301222</strong>
-
+          <a routerLink="/about-this-app"><strong> misa301222</strong></a>
         </p>
 
       </div>

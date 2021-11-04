@@ -1,12 +1,11 @@
-<div class="container">
+<div [@fadeInOnEnter] class="container">
     <div class="text-center title">
         <p [@fadeInRightOnEnter] class="h1">Products &#10084;</p>
     </div>
     <hr>
     <div class="row row-cols-3">
-        <div class="col cards rounded" [@fadeInRightOnEnter] *ngFor="let product of products">
-            <div class="card shadow">
-
+        <div class="col cards rounded" [@fadeInRightOnEnter] *ngFor="let product of products, index as i">
+            <div class="card shadow" (mouseover)="toggle(i)" (mouseleave)="toggleMouseLeave(i)" [@makeCardBigger]="isImageBig[i] ? 'big' : 'normal'">
                 <div class="card-header">
                     {{product.productName}}
                 </div>
@@ -44,7 +43,7 @@
 </ng-template>
 
 <ng-template #noAvailable>
-    <div class="availability-footer">        
+    <div class="availability-footer">
         <small class="text-danger"> This product is not Available. Please wait until we restock.</small>
     </div>
 </ng-template>

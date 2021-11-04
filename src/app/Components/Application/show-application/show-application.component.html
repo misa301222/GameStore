@@ -1,6 +1,6 @@
 <div [@fadeInOnEnter] class="container">
 
-    <div class="pending-div" *ngIf="applicationsPendingList.length > 0">
+    <div [@bounceInLeftOnEnter] class="pending-div" *ngIf="applicationsPendingList.length > 0">
         <div class="row align-items-start">
             <div class="col">
 
@@ -31,7 +31,7 @@
         </div>
     </div>
 
-    <div class="accepted-div" *ngIf="applicationsAcceptedList.length > 0">
+    <div [@bounceInLeftOnEnter] class="accepted-div" *ngIf="applicationsAcceptedList.length > 0">
         <p class="h2 header-text">
             Accepted Applications
         </p>
@@ -50,7 +50,7 @@
         </div>
     </div>
 
-    <div class="rejected-div" *ngIf="applicationsRejectedList.length > 0">
+    <div [@bounceInLeftOnEnter] class="rejected-div" *ngIf="applicationsRejectedList.length > 0">
         <p class="h2 header-text">
             Rejected Applications
         </p>
@@ -76,7 +76,7 @@
         <h4 class="modal-title" id="modal-basic-title">Application</h4>
     </div>
     <div class="modal-body">
-        <div class="container">
+        <div class="container-edit">
             <form [formGroup]="viewApplicationForm" (ngSubmit)="evaluateApplication($event.submitter.id)">
                 <div class="card">
                     <div class="card-header fw-bold">

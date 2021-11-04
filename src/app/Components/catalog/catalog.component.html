@@ -18,9 +18,8 @@
 
     <hr>
     <div class="row row-cols-3">
-        <div class="col cards rounded" *ngFor="let product of productList | filter:filterTerm">
-            <div class="card">
-
+        <div class="col cards rounded" *ngFor="let product of productList | filter:filterTerm; index as i">
+            <div class="card" (mouseover)="toggle(i)" (mouseleave)="toggleMouseLeave(i)" [@makeCardBigger]="isImageBig[i] ? 'big' : 'normal'">
                 <div class="card-header">
                     {{product.productName}}
                 </div>
@@ -57,6 +56,6 @@
 
 <ng-template #noAvailable>
     <div class="availability-footer">
-        <small> This product is not Available. Please wait until we restock.</small>
+        <small class="text-danger"> This product is not Available. Please wait until we restock.</small>
     </div>
 </ng-template>

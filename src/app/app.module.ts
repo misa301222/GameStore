@@ -36,6 +36,7 @@ import { HelpComponent } from './Components/help/help.component';
 import { TeamComponent } from './Components/team/team.component';
 import { SendApplicationComponent } from './Components/Application/send-application/send-application.component';
 import { ShowApplicationComponent } from './Components/Application/show-application/show-application.component';
+import { AboutThisAppComponent } from './Components/about-this-app/about-this-app.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { ShowApplicationComponent } from './Components/Application/show-applicat
     HelpComponent,
     TeamComponent,
     SendApplicationComponent,
-    ShowApplicationComponent
+    ShowApplicationComponent,
+    AboutThisAppComponent
   ],
   imports: [
     BrowserModule,

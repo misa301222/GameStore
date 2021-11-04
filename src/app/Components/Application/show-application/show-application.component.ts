@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { fadeInOnEnterAnimation } from 'angular-animations';
+import { bounceInLeftOnEnterAnimation, fadeInOnEnterAnimation } from 'angular-animations';
 import { ToastrService } from 'ngx-toastr';
 import { EmploymentApplication } from 'src/app/Models/employmentApplication';
 import { ApplicationStatusService } from 'src/app/services/application-status.service';
@@ -12,7 +12,10 @@ import { JobsService } from 'src/app/services/jobs.service';
   selector: 'app-show-application',
   templateUrl: './show-application.component.html',
   styleUrls: ['./show-application.component.scss'],
-  animations: [fadeInOnEnterAnimation()]
+  animations: [
+    fadeInOnEnterAnimation(),
+    bounceInLeftOnEnterAnimation()
+  ]
 })
 export class ShowApplicationComponent implements OnInit {
 
@@ -26,6 +29,7 @@ export class ShowApplicationComponent implements OnInit {
   filterTermPending: string;
   filterTermAccepted: string;
   filterTermRejected: string;
+  pendingBounceLeft: boolean = false;
 
 
   public viewApplicationForm = this.formBuilder.group({
@@ -42,6 +46,7 @@ export class ShowApplicationComponent implements OnInit {
     this.getAllEmploymentApplicationsByStatusId(1);
     this.getAllEmploymentApplicationsByStatusId(2);
     this.getAllEmploymentApplicationsByStatusId(3);
+    this.toggle();
   }
 
   getAllEmploymentApplicationsByStatusId(statusId: number) {
@@ -79,7 +84,7 @@ export class ShowApplicationComponent implements OnInit {
   }
 
   viewApplication(employmentApplicationId: number, content) {
-    console.log(employmentApplicationId);
+
     this.modalService.open(content);
     return this.employmentApplicationService.getApplicationByEmploymentApplicationId(employmentApplicationId).subscribe(data => {
       this.viewApplicationForm.controls['email'].setValue(data.email);
@@ -91,14 +96,14 @@ export class ShowApplicationComponent implements OnInit {
       this.getStatusById(data.applicationStatus);
       this.viewApplicationForm.disable();
       this.statusId = data.applicationStatus;
-      console.log('status: ' + this.statusId);
+
     })
   }
 
   evaluateApplication(event: MouseEvent) {
     let btnResult = event.toString();
     let email = this.viewApplicationForm.controls['email'].value;
-    console.log(email);
+
     switch (btnResult) {
       case 'btnAccept':
         this.employmentApplicationService.updateApplicationStatus(email, 2).subscribe(data => {
@@ -106,7 +111,7 @@ export class ShowApplicationComponent implements OnInit {
             positionClass: 'toast-top-center'
           })
           this.modalService.dismissAll();
-          console.log(data);
+
           this.getAllEmploymentApplicationsByStatusId(1);
           this.getAllEmploymentApplicationsByStatusId(2);
           this.getAllEmploymentApplicationsByStatusId(3);
@@ -119,7 +124,7 @@ export class ShowApplicationComponent implements OnInit {
             positionClass: 'toast-top-center'
           })
           this.modalService.dismissAll();
-          console.log(data);
+
           this.getAllEmploymentApplicationsByStatusId(1);
           this.getAllEmploymentApplicationsByStatusId(2);
           this.getAllEmploymentApplicationsByStatusId(3);
@@ -131,13 +136,23 @@ export class ShowApplicationComponent implements OnInit {
           this.toastr.info('Application Sent to Pending', 'Application', {
             positionClass: 'toast-top-center'
           })
+          this.toggle();
           this.modalService.dismissAll();
-          console.log(data);
+
           this.getAllEmploymentApplicationsByStatusId(1);
           this.getAllEmploymentApplicationsByStatusId(2);
           this.getAllEmploymentApplicationsByStatusId(3);
+
+
         })
+
+
         break;
     }
   }
+
+  toggle() {
+    this.pendingBounceLeft = true;
+  }
+
 }

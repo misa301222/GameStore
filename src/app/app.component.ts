@@ -1,7 +1,6 @@
-import { state, style, trigger } from '@angular/animations';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { bounceInAnimation, fadeInDownAnimation } from 'angular-animations';
+import { bounceAnimation, fadeInDownAnimation } from 'angular-animations';
 import { Constants } from './Helper/constants';
 import { Category } from './Models/category';
 import { User } from './Models/user';
@@ -13,19 +12,23 @@ import { CategoryService } from './services/category.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   animations: [
-    //TODO ANIMACION AL ABRIR DROPDOWNMENU
-    fadeInDownAnimation()
+    fadeInDownAnimation(),
+    bounceAnimation()
   ]
 })
+
 export class AppComponent {
   title = 'Store';
   categoryList: Category[] = [];
+  categoryListFooter: Category[] = [];
   email: string = "";
+  isBouncing: boolean[] = [false, false, false, false, false, false];
 
   constructor(private router: Router, private categoryService: CategoryService, private cartService: CartService) { }
 
   ngOnInit(): void {
     this.getCategories();
+    this.getCategoriesForFooter();
     this.getEmail();
   }
 
@@ -33,6 +36,10 @@ export class AppComponent {
     this.cartService.removeAllCart();
     localStorage.clear();
     localStorage.removeItem(Constants.USER_KEY);
+  }
+
+  toggleBouncing(index: number) {
+    this.isBouncing[index] = !this.isBouncing[index];
   }
 
   get isUserLogin() {
@@ -62,8 +69,13 @@ export class AppComponent {
 
   getCategories() {
     return this.categoryService.getAllCategories().subscribe(data => {
-      console.log(data);
       this.categoryList = data;
+    })
+  }
+
+  getCategoriesForFooter() {
+    return this.categoryService.getAllCategories().subscribe(data => {
+      this.categoryListFooter = data.slice(0, 3);
     })
   }
 

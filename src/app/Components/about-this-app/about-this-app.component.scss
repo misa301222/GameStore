@@ -1,0 +1,41 @@
+#netCoreLogo {
+    width: 9em;
+    height: 9em;
+}
+
+#angularLogo {
+    width: 9em;
+    height: 9em;
+}
+
+#mySQLLogo {
+    width: 14em;
+    height: 9em;
+}
+
+.technologies-row {
+    margin-top: 5em;
+}
+
+.thumbnail {
+    border-radius: 13px;
+    box-shadow: 1px;
+}
+
+.title {
+    border-radius: 25px;
+    background: rgb(255, 255, 255);
+    background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(186, 186, 205, 1) 71%);
+}
+
+.subtitle {
+    border-radius: 25px;
+    background: rgb(255, 255, 255);
+    background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(250, 227, 197, 1) 44%);
+}
+
+@media (max-width: 991px) {
+    .thumbnail {
+        width: 40em;
+    }
+}

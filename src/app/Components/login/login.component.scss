@@ -1,4 +1,41 @@
-.container{
+.container {
     padding-top: 3em;
-    padding-bottom: 20em;
+    padding-bottom: 3em;
+}
+
+.background {
+    background-image: url("/assets/images/store.jpg");
+    background-size: cover;
+    height: 45em;
+    border-radius: 12px;
+
+    .box {
+        max-width: 30em;
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+        border-radius: 13px;
+        box-shadow: 0px 3px 3px gray;
+        margin: 0 auto;
+        margin-top: 8em;
+
+        hr {
+            color: white;
+            height: 2px;
+        }
+
+        p,
+        h5,
+        label {
+            color: white;
+        }
+
+        li {
+            color: white;
+            list-style-type: none;
+        }
+    }
+}
+
+#btnAnimationLogin {
+    border-radius: 13px;
 }

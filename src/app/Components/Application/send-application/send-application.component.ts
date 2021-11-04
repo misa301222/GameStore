@@ -11,6 +11,8 @@ import { ApplicationStatusService } from 'src/app/services/application-status.se
 import { EmploymentApplicationService } from 'src/app/services/employment-application.service';
 import { JobsService } from 'src/app/services/jobs.service';
 import * as Confetti from 'canvas-confetti';
+import { Subject, timer } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-send-application',
@@ -24,6 +26,7 @@ export class SendApplicationComponent implements OnInit {
     private toastr: ToastrService, private applicationStatusService: ApplicationStatusService) { }
 
   jobList: Jobs[] = [];
+  subject = new Subject();
   email: string;
   applicationSent = false;
   applicationInfo: EmploymentApplication = new EmploymentApplication();
@@ -51,7 +54,10 @@ export class SendApplicationComponent implements OnInit {
   ngOnInit(): void {
     this.getAllJobs();
     this.getEmail();
-    //this.fireConfetti();
+  }
+
+  ngOnDestroy(): void {
+    this.stopConfetti();
   }
 
   sendApplication() {
@@ -77,7 +83,7 @@ export class SendApplicationComponent implements OnInit {
 
   onChangeCategory($event) {
     this.sendApplicationForm.controls['employmentDesired'].setValue($event.target.options[$event.target.options.selectedIndex].value);
-    console.log(this.sendApplicationForm.controls['employmentDesired'].value);
+    
   }
 
   getAllJobs() {
@@ -111,10 +117,18 @@ export class SendApplicationComponent implements OnInit {
         this.getStatusById(data.applicationStatus);
         this.viewApplicationForm.disable();
         this.applicationStatus = data.applicationStatus;
+        if (data.applicationStatus == 2) {
+          this.fireConfetti();
+        }
       } else {
         this.applicationSent = false;
       }
     })
+  }
+
+  get isUserLogin() {
+    const user = localStorage.getItem(Constants.USER_KEY);
+    return user && user.length > 0;
   }
 
   get user(): User {
@@ -135,21 +149,40 @@ export class SendApplicationComponent implements OnInit {
     }
   }
 
-  /*
-  fireConfetti(){
-    
-    Confetti.create()({
-      //shapes: ['square'],
+  fireConfetti() {
+    let interval = 1 * 1000;
+    let secondCount = 0;
+    let secondLimit = 20;
+    timer(0, interval).pipe(takeUntil(this.subject))
+      .subscribe(t => {
+        secondCount += 1;
+        this.showConfetti();
+        if (secondCount == secondLimit) {
+          this.stopConfetti();
+        }
+      });
+  }
+
+  showConfetti() {
+    let canvas = document.getElementById('container');
+
+    Confetti.create(canvas, { resize: true })({
+      shapes: ['square'],
       particleCount: 100,
-      spread: 360,
-      resize: true,
+      spread: 90,
       origin: {
-        x: Math.random(),
-        // since they fall down, start a bit higher than random
-        y: Math.random() - 0.2
+        x: this.randomInRange(0.1, 0.9),
+        y: this.randomInRange(0, 0.5)
       }
     });
   }
-  */
+
+  stopConfetti() {
+    this.subject.next();
+  }
+
+  randomInRange(min, max) {
+    return Math.random() * (max - min) + min;
+  }
 
 }

@@ -58,7 +58,7 @@ export class RegisterGameComponent implements OnInit {
     let quantity = this.registerGameForm.controls['quantity'].value
 
     this.gameService.addGame(idGame, gameName, publisher, price, releaseDate, category, coverUrl, description, quantity).subscribe(x => {
-      console.log(x);
+      
       this.registerGameForm.controls["idGame"].setValue("")
       this.registerGameForm.controls["gameName"].setValue("")
       this.registerGameForm.controls["publisher"].setValue("")

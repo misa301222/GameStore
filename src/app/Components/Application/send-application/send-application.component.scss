@@ -1,0 +1,20 @@
+.header-application {
+    text-align: center;
+}
+
+.accepted-div {
+    margin-top: 3em;
+    text-align: center;
+}
+
+canvas {
+    height: 100%; /* we need these for full-screen effect */
+    width: 100%;
+}
+
+.background {
+    background-image: url('/assets/images/work.jpg');
+    background-size: cover;
+    height: 50em;
+    border-radius: 13px;
+}

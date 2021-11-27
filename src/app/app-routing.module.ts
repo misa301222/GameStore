@@ -22,13 +22,25 @@ import { ShowProductComponent } from './Components/Product/show-product/show-pro
 import { ProfileComponent } from './Components/profile/profile.component';
 import { RegisterComponent } from './Components/register/register.component';
 import { UserManagmentComponent } from './Components/user-managment/user-managment.component';
+import { ContactComponent } from './Components/contact/contact.component';
+import { HelpComponent } from './Components/help/help.component';
+import { TeamComponent } from './Components/team/team.component';
+import { SendApplicationComponent } from './Components/Application/send-application/send-application.component';
+import { ShowApplicationComponent } from './Components/Application/show-application/show-application.component';
+import { AboutThisAppComponent } from './Components/about-this-app/about-this-app.component';
 
 const routes: Routes = [
   { path: "", redirectTo: 'home', pathMatch: 'full' },
   { path: "register", component: RegisterComponent },
   { path: "login", component: LoginComponent },
   { path: "home", component: HomeComponent },
-
+  { path: "contact", component: ContactComponent },
+  { path: "help", component: HelpComponent },
+  { path: "team", component: TeamComponent },
+  { path: "send-application", component: SendApplicationComponent },
+  { path: "catalog/:categoryId", component: CatalogComponent },
+  { path: "Product/buy-product/:productId", component: BuyProductComponent },
+  { path: "about-this-app", component: AboutThisAppComponent },
   {
     path: "admin-board", component: AdminBoardComponent,
     canActivate: [AuthGuard],
@@ -100,21 +112,11 @@ const routes: Routes = [
     }
   },
   {
-    path: "Product/buy-product/:productId", component: BuyProductComponent,
-    canActivate: [AuthGuard],
-    data: {
-      role: ['Admin', 'User']
-    }
-  },
-  {
     path: "Game/buy-game/:idGame", component: BuyGameComponent,
     canActivate: [AuthGuard],
     data: {
       role: ['Admin', 'User']
     }
-  },
-  {
-    path: "catalog/:categoryId", component: CatalogComponent
   },
   {
     path: "funds", component: FundsComponent,
@@ -136,11 +138,20 @@ const routes: Routes = [
     data: {
       role: ['Admin', 'User']
     }
+  },
+  {
+    path: "show-application", component: ShowApplicationComponent,
+    canActivate: [AuthGuard],
+    data: {
+      role: ['Admin']
+    }
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+    scrollPositionRestoration: 'enabled'
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

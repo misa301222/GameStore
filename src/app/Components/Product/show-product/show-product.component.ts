@@ -2,6 +2,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { fadeInOnEnterAnimation } from 'angular-animations';
 import { Category } from 'src/app/Models/category';
 import { Product } from 'src/app/Models/product';
 import { CategoryService } from 'src/app/services/category.service';
@@ -12,7 +13,7 @@ import { ProductService } from 'src/app/services/product.service';
   templateUrl: './show-product.component.html',
   styleUrls: ['./show-product.component.scss'],
   animations: [
-    
+    fadeInOnEnterAnimation()
   ]
 })
 export class ShowProductComponent implements OnInit {
@@ -69,7 +70,7 @@ export class ShowProductComponent implements OnInit {
 
   openModalDelete(contentDelete, productId: number) {
     this.idToDelete = productId;
-    console.log(this.idToDelete);
+    
     this.modalService.open(contentDelete);
   }
 
@@ -82,15 +83,15 @@ export class ShowProductComponent implements OnInit {
     let price = this.editProductForm.controls['price'].value;
     let quantity = this.editProductForm.controls['quantity'].value;
 
-    console.log(idProduct);
-    console.log(productName);
-    console.log(description);
-    console.log(cover);
-    console.log(category);
-    console.log(price);
+    
+    
+    
+    
+    
+    
 
     this.productService.editProduct(idProduct, productName, description, cover, category, price, quantity).subscribe(data => {
-      console.log(data);
+      
       this.editProductForm.controls['productId'].setValue('');
       this.editProductForm.controls['productName'].setValue('');
       this.editProductForm.controls['description'].setValue('');
@@ -106,7 +107,7 @@ export class ShowProductComponent implements OnInit {
 
   deleteProduct(productId: number) {
     this.productService.deleteGame(productId).subscribe(data => {
-      console.log(data);
+      
       this.modalService.dismissAll();
       this.getAllProducts();
     });
@@ -115,8 +116,8 @@ export class ShowProductComponent implements OnInit {
 
   generateReport() {
     this.productService.generateReport().subscribe(data => {
-      console.log('OK!');
-      console.log(data);
+      
+      
       var file = new Blob([data], { type: 'application/pdf' });
       var fileURL = URL.createObjectURL(file);
       window.open(fileURL);

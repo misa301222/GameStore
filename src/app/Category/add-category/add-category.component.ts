@@ -1,12 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { fadeInOnEnterAnimation } from 'angular-animations';
 import { CategoryService } from 'src/app/services/category.service';
 
 @Component({
   selector: 'app-add-category',
   templateUrl: './add-category.component.html',
-  styleUrls: ['./add-category.component.scss']
+  styleUrls: ['./add-category.component.scss'],
+  animations: [
+    fadeInOnEnterAnimation()
+  ]
 })
 export class AddCategoryComponent implements OnInit {
 
@@ -26,7 +30,6 @@ export class AddCategoryComponent implements OnInit {
     let categoryName = this.addCategoryForm.controls['categoryName'].value;
 
     this.categoryService.addCategory(categoryId, categoryName).subscribe(data=> {
-      console.log(JSON.stringify(data));
       this.addCategoryForm.controls['categoryId'].setValue('');
       this.addCategoryForm.controls['categoryName'].setValue('');
       this.open(content);

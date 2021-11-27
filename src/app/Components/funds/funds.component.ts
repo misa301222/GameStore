@@ -37,7 +37,7 @@ export class FundsComponent implements OnInit {
 
   getCurrentUser() {
     this.userService.getCurrentUser().subscribe((data: User) => {
-      console.log(data);
+      
       this.user = data;
     });
   }
@@ -61,7 +61,7 @@ export class FundsComponent implements OnInit {
 
     let totalFunds = funds;
     this.userService.addFunds(JSON.stringify(email), totalFunds).subscribe(data => {
-      console.log(JSON.stringify(data));
+      
       this.fundsForm.controls['funds'].setValue('');
       this.open(content);
     })

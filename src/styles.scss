@@ -1,6 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
-@import "~node_modules/bootstrap/scss/bootstrap";
+//@import "~node_modules/bootstrap/scss/bootstrap";
 /* Importing Bootstrap SCSS file. */
 //@import '~bootstrap/scss/bootstrap';
 
-@import '~ngx-toastr/toastr';
+@import "~ngx-toastr/toastr";
+
+/* Importing Bootstrap SCSS file. */
+@import "~bootstrap/scss/bootstrap";
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}

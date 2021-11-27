@@ -1,8 +1,59 @@
-.imagen{
+.imagen {
     height: 15em;
     width: 18em;
 }
 
+hr {
+    margin-top: 10em;
+}
+
 .container {
     padding-top: 3em;
+}
+
+
+.title {
+    border-radius: 25px;
+    background: rgb(255, 255, 255);
+    background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(186, 186, 205, 1) 71%);
+}
+
+textarea {
+    resize: none;
+}
+
+.addReviewForm {
+    padding-top: 10em;
+    padding-bottom: 15em;
+}
+
+.like-form {
+    padding-left: 2em;
+}
+
+.verified-text {
+    color: #e67300;
+}
+
+.not-verified-text {
+    color: blue;
+}
+
+.text-restock{
+    padding-right: 3em;
+}
+
+@media (max-width: 991px) {
+    .imagen {
+        height: 12em;
+        width: 13em;
+    }
+
+    .card-body {
+        height: auto;
+    }
+
+    .btn {
+        border-radius: 15px;
+    }
 }

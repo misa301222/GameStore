@@ -1,34 +1,36 @@
-<div class="container">
-    <div class="row justify-content-center">
-
-        <div class="col-6">
-            <div class="card">
-                <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-                    <div class="card-body">
-                        <h5 class="card-title text-center">Login</h5>
-                        <div class="mb-3 row">
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
-                            <div class="col-sm-10">
-                                <input type="text" formControlName="email" class="form-control" id="staticEmail"
-                                    value="">
-                            </div>
-                        </div>
-                        <div class="mb-3 row">
-                            <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
-                            <div class="col-sm-10">
-                                <input type="password" formControlName="password" class="form-control"
-                                    id="inputPassword">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <button type="submit" class="btn btn-dark" [disabled]="!loginForm.valid">Login</button>
+<div [@fadeInOnEnter] class="container">
+    <p class="h3 text-center">
+        Welcome to the store!
+    </p>
+    <br>
+    <div class="background" [@imageLoginState]="showImage ? 'normal' : 'rotateAnimation'" (@imageLoginState.done)="animationDone($event)">
+        <div class="container col-md-6">
+            <form [formGroup]="loginForm" class="box" (ngSubmit)="onSubmit()">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Login</h5>
+                    <div class="mb-3 row">
+                        <label for="staticEmail" class="col-sm-2 col-form-label fw-bold">Email</label>
+                        <div class="col-sm-10">
+                            <input type="text" formControlName="email" class="form-control" id="staticEmail" value="">
                         </div>
                     </div>
-
-                </form>
-            </div>
+                    <div class="mb-3 row">
+                        <label for="inputPassword" class="col-sm-2 col-form-label fw-bold">Password</label>
+                        <div class="col-sm-10">
+                            <input type="password" formControlName="password" class="form-control" id="inputPassword">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <button type="submit" class="btn btn-success" [disabled]="!loginForm.valid">Login</button>
+                    </div>
+                </div>
+            </form>
         </div>
-
     </div>
+
+    <div class="container text-center">
+        <button class="btn btn-dark" id="btnAnimationLogin" (click)="toggle()">Don't press this button</button>
+        <h2 *ngIf="buttonWasPressed" class="fw-bold fst-italic">I told you not to press it <3</h2>
+    </div>
+
 </div>
-<router-outlet></router-outlet>

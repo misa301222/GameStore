@@ -55,7 +55,7 @@ export class ProductService {
       ProductId: productId,
       Quantity: quantity
     }
-    console.log('antes de post');
+    
     return this.httpClient.post<Product>(this.baseURL + '/UpdateQuantity', body);
   }
 

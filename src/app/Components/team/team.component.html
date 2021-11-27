@@ -1,0 +1,172 @@
+<div [@fadeInOnEnter] class="container text-center">
+    <p class="h1">Join Us!</p>
+
+    <div class="background">
+        <div class="container d-flex justify-content-center">
+            <div class="box text-center">
+                <p class="h2 header-contact">Join us here</p>
+                <hr>
+                <p class="h5">We are always searching for great talent. If you can, try to apply to the diverse areas we
+                    have. </p>
+                <p class="">Scroll down and if you want to apply, send us an email to admin@gmail.com </p>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="d-flex nav-lateral">
+        <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-pills" orientation="vertical">
+            <li ngbNavItem="top">
+                <a ngbNavLink>Sofware Development</a>
+                <ng-template ngbNavContent>
+                    <div class="container-tab">
+                        <p class="h3">Software Development</p>
+                        <img (mouseover)="toggle()" (mouseleave)="toggleMouseLeave()" [@makeImageBigger]="isImageBig ? 'big' : 'normal'" class="thumbnail" src="/assets/images/code.jpg" alt="Code">
+                        <br><br>
+                        <p class="h5"> If you are good with numbers and code you should check out the requirements. </p>
+                        <br>
+                        <div class="card">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    Being good at logic, problem solving.
+                                </li>
+                            </ul>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    Have a degree.
+                                </li>
+                            </ul>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    Lots of free time ;)
+                                </li>
+                            </ul>
+                        </div>
+                        <br><br>
+                        <p class="h5">Are you good at that?</p>
+                        <div class="container-question d-flex justify-content-evenly">
+
+                            <button type="button" (click)="btnYes(contentYes)" class="btn btn-secondary">Yes!!</button>
+                            <button type="button" (click)="btnYes(contentNo)" class="btn btn-dark">No</button>
+                        </div>
+
+                    </div>
+                </ng-template>
+            </li>
+            <li ngbNavItem="middle">
+                <a ngbNavLink>Marketing Team</a>
+                <ng-template ngbNavContent>
+                    <div class="container-tab">
+                        <p class="h3">Marketing Team</p>
+                        <img (mouseover)="toggle()" (mouseleave)="toggleMouseLeave()" [@makeImageBigger]="isImageBig ? 'big' : 'normal'" class="thumbnail" src="/assets/images/marketing.jpg" alt="Code">
+                        <br><br>
+                        <p class="h5"> If you are good with people and money managment you should check out the
+                            requirements. </p>
+                        <br>
+                        <div class="card">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    Don't be shy OwO
+                                </li>
+                            </ul>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    Have a degree.
+                                </li>
+                            </ul>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    Lots of free time ;)
+                                </li>
+                            </ul>
+                        </div>
+                        <br><br>
+                        <p class="h5">Are you good at that?</p>
+                        <div class="container-question d-flex justify-content-evenly">
+
+                            <button type="button" (click)="btnYes(contentYes)" class="btn btn-secondary">Yes!!</button>
+                            <button type="button" (click)="btnYes(contentNo)" class="btn btn-dark">No</button>
+                        </div>
+
+                    </div>
+                </ng-template>
+            </li>
+            <li ngbNavItem="bottom">
+                <a ngbNavLink>Administrative Team</a>
+                <ng-template ngbNavContent>
+                    <div class="container-tab">
+                        <p class="h3">Administrative Team</p>
+                        <img (mouseover)="toggle()" (mouseleave)="toggleMouseLeave()" [@makeImageBigger]="isImageBig ? 'big' : 'normal'" class="thumbnail" src="/assets/images/administrative.jpg" alt="Code">
+                        <br><br>
+                        <p class="h5"> If you are good with administrative tools you should check out the requirements.
+                        </p>
+                        <br>
+                        <div class="card">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    Having great organization capabilities.
+                                </li>
+                            </ul>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    Have a degree.
+                                </li>
+                            </ul>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    Lots of free time ;)
+                                </li>
+                            </ul>
+                        </div>
+                        <br><br>
+                        <p class="h5">Are you good at that?</p>
+                        <div class="container-question d-flex justify-content-evenly">
+
+                            <button type="button" (click)="btnYes(contentYes)" class="btn btn-secondary">Yes!!</button>
+                            <button type="button" (click)="btnYes(contentNo)" class="btn btn-dark">No</button>
+                        </div>
+
+                    </div>
+                </ng-template>
+            </li>
+        </ul>
+
+        <div [ngbNavOutlet]="nav" class="ml-4"></div>
+    </div>
+</div>
+
+<ng-template #contentYes let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">You are good at that!!!</h4>
+    </div>
+    <div class="modal-body">
+        <div class="form-group text-center">
+            <p class="h6">It seems you are good at that! You can send us your work application</p>
+            <iframe src="https://giphy.com/embed/5vhO9nq6rilECXIxbe" width="480" height="480" frameBorder="0"
+                class="giphy-embed"></iframe>
+            <button type="button" (click)="goToApplication()" class="btn btn-success">Send</button>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="modal.close()">Close</button>
+    </div>
+</ng-template>
+
+<ng-template #contentNo let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">You are not good at that :(</h4>
+    </div>
+    <div class="modal-body">
+        <div class="form-group text-center">
+            <p class="h6">It seems you are not good at that! If you change your mind you can always send us an
+                application anyway UwU</p>
+            <iframe src="https://giphy.com/embed/FZ1ulgaaQziyk" width="480" height="480" frameBorder="0"
+                class="giphy-embed"></iframe>
+            <button type="button" (click)="goToApplication()" class="btn btn-success">Send</button>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="modal.close()">Close</button>
+    </div>
+</ng-template>

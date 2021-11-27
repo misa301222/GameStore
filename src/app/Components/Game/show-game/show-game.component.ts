@@ -72,10 +72,10 @@ export class ShowGameComponent implements OnInit {
   }
 
   deleteGame(idGame: number) {
-    console.log(idGame);
+    
 
     return this.gameService.deleteGame(idGame).subscribe(x => {
-      console.log(x);
+      
       this.getAllGames();
     });
   }
@@ -105,7 +105,7 @@ export class ShowGameComponent implements OnInit {
     let quantity = this.editGameForm.controls['quantity'].value
 
     this.gameService.editGame(idGame, gameName, publisher, price, releaseDate, category, coverUrl, description, quantity).subscribe(x => {
-      console.log(x);
+      
       this.editGameForm.controls["idGame"].setValue("")
       this.editGameForm.controls["gameName"].setValue("")
       this.editGameForm.controls["publisher"].setValue("")

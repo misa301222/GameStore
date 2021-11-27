@@ -1,4 +1,4 @@
-import { animate, style, transition, trigger } from '@angular/animations';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { fadeInAnimation, fadeInOnEnterAnimation, fadeInRightAnimation, fadeInRightOnEnterAnimation, rubberBandAnimation } from 'angular-animations';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -12,20 +12,42 @@ import { ProductService } from 'src/app/services/product.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
   animations: [
-    fadeInRightOnEnterAnimation()
+    fadeInRightOnEnterAnimation(),
+    fadeInOnEnterAnimation(),
+    trigger('makeCardBigger', [
+      state('normal', style({
+        transform: 'translateX(0px)'
+      })),
+      state('big', style({
+        transform: 'scale(1.1, 1.1)'
+      })),
+      transition('normal => big', animate('250ms ease-out')),
+      transition('big => normal', animate('250ms ease-in'))
+    ])
   ]
 
 })
 export class HomeComponent implements OnInit {
 
+  constructor(private productService: ProductService, private router: Router, private gameService: GameService) { }
+
   products: Product[] = [];
   games: Game[] = [];
-  rubberState = false;
-  constructor(private productService: ProductService, private router: Router, private gameService: GameService) { }
+  isImageBig: boolean[] = [false];
 
   ngOnInit(): void {
     this.getProducts();
     this.getAllGames();
+  }
+
+  toggle(i: number) {
+    this.isImageBig[i] = true;
+    return this.isImageBig;
+  }
+
+  toggleMouseLeave(i: number) {
+    this.isImageBig[i] = false;
+    return this.isImageBig;
   }
 
   getProducts() {

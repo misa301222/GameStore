@@ -22,7 +22,7 @@ export class BuyGameComponent implements OnInit {
   getGameById(idGame: number) {
     this.gameService.getGameById(idGame).subscribe(data => {
       this.selectedGame = data;
-      console.log(JSON.stringify(data));
+      
     })
   }
 

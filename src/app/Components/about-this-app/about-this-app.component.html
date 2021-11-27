@@ -1,0 +1,130 @@
+<div [@fadeInOnEnter] class="container">
+    <br>
+    <h2 class="text-center"> About this App </h2>
+    <hr>
+
+    <div class="row technologies-row">
+        <h4 class="text-center"> Technologies Used </h4>
+        <hr>
+        <div class="col text-center">
+            <img id="netCoreLogo" [@displayTechnologies]="isRandomPlace ? 'randomPlace' : 'correctPlace'"
+                src="assets/images/netCoreLogo.png" (@displayTechnologies.done)="frameworkAnimationDone($event)"
+                [@rubberBand]="playRubberBand[0]" (mouseover)="toggleRubberBand(0)">
+            <br>
+            <br>
+            <h4 [@displayTechnologyNames]="!isTextVisible ? 'hide' : 'show'">.NET Core 5</h4>
+        </div>
+
+        <div class="col text-center">
+            <img id="angularLogo" [@displayTechnologies]="isRandomPlace ? 'randomPlace' : 'correctPlace'"
+                class="framework-logo" src="assets/images/angularLogo.png" [@rubberBand]="playRubberBand[1]"
+                (mouseover)="toggleRubberBand(1)">
+            <br>
+            <br>
+            <h4 [@displayTechnologyNames]="!isTextVisible ? 'hide' : 'show'">Angular 12</h4>
+        </div>
+
+        <div class="col text-center">
+            <img id="mySQLLogo" [@displayTechnologies]="isRandomPlace ? 'randomPlace' : 'correctPlace'"
+                class="framework-logo" src="assets/images/mySQLLogo.png" [@rubberBand]="playRubberBand[2]"
+                (mouseover)="toggleRubberBand(2)">
+            <br>
+            <br>
+            <h4 [@displayTechnologyNames]="!isTextVisible ? 'hide' : 'show'">MySQL Server</h4>
+        </div>
+    </div>
+
+    <br>
+    <br>
+
+    <div class="container info-container">
+        <h4 class="text-center"> Info/Features </h4>
+        <hr>
+        <p class="">This page was created for educational/learning purposes. It's an Online Store Simulation. Here you
+            have multiple users with multiple roles. You can practically add or delete every product.</p>
+        <br>
+        <div class="row">
+            <div class="col">
+                <img [@makeImageDance]="!isImageDancing[0] ? 'normal' : 'dance'" (click)="toggleImageDancing(0)"
+                    (@makeImageDance.done)="imageDancingDone(0, $event)" class="thumbnail shadow"
+                    src="assets/images/JWT.png">
+            </div>
+
+            <div class="col">
+                <h5>JWT Authentication</h5>
+                <p class="">JWT Authentication handled by Back-End. </p>
+            </div>
+        </div>
+
+        <br>
+        <br>
+
+        <div class="row">
+            <div class="col">
+                <h5>Entity Framework</h5>
+                <p class="">Handled by Back-End. Highly efficient and fun to use.</p>
+            </div>
+
+            <div class="col">
+                <img [@makeImageDance]="!isImageDancing[1] ? 'normal' : 'dance'" (click)="toggleImageDancing(1)"
+                    (@makeImageDance.done)="imageDancingDone(1, $event)" class="thumbnail shadow"
+                    src="assets/images/entityFramework.png">
+            </div>
+        </div>
+
+        <br>
+        <br>
+
+        <div class="row">
+            <div class="container">
+                <h5 class="fw-bold text-center title">Users with Different Multiple Roles</h5>
+                <hr>
+                <p>You can create user with User or Admin role. Obviously, the Admin can control all the important data
+                    in the App. There's a Funds column. It's the money they can spend in the store. </p>
+                <img [@makeImageDance]="!isImageDancing[2] ? 'normal' : 'dance'" (click)="toggleImageDancing(2)"
+                    (@makeImageDance.done)="imageDancingDone(2, $event)" class="thumbnail shadow"
+                    src="assets/images/allUsers.png">
+            </div>
+        </div>
+
+        <br>
+        <br>
+
+        <div class="row">
+            <div class="container">
+                <h5 class="fw-bold text-center title">Buy Product Component</h5>
+                <hr>
+                <h5 class="fst-italic text-center subtitle">Product Section</h5>
+                <p class="text-center"> This is one of the main components. Here you can add reviews. Like or dislike
+                    reviews. Delete the
+                    own user
+                    review and Add product to Cart. </p>
+                <img [@makeImageDance]="!isImageDancing[3] ? 'normal' : 'dance'" (click)="toggleImageDancing(3)"
+                    (@makeImageDance.done)="imageDancingDone(3, $event)" class="thumbnail shadow"
+                    src="assets/images/review.png">
+                <br>
+                <br>
+                <h5 class="fst-italic  text-center subtitle">Review Section</h5>
+                <p class="text-center">Here you can like or dislike reviews. If you left a review in a previously
+                    purchased
+                    product. The verified text will appear. Otherwise, the not verified text will be displayed.</p>
+                <img [@makeImageDance]="!isImageDancing[4] ? 'normal' : 'dance'" (click)="toggleImageDancing(4)"
+                    (@makeImageDance.done)="imageDancingDone(4, $event)" class="thumbnail shadow"
+                    src="assets/images/reviewLike.png">
+
+
+            </div>
+        </div>
+
+        <br>
+        <br>
+        <br>
+
+        <div class="row text-center">
+            <h2>And a lot more... make sure to explore all the website =]</h2>
+        </div>
+
+
+    </div>
+
+</div>

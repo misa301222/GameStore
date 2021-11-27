@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { fadeInOnEnterAnimation } from 'angular-animations';
 import { Category } from 'src/app/Models/category';
 import { CategoryService } from 'src/app/services/category.service';
 import { ProductService } from 'src/app/services/product.service';
@@ -8,7 +9,10 @@ import { ProductService } from 'src/app/services/product.service';
 @Component({
   selector: 'app-add-product',
   templateUrl: './add-product.component.html',
-  styleUrls: ['./add-product.component.scss']
+  styleUrls: ['./add-product.component.scss'],
+  animations: [
+    fadeInOnEnterAnimation()
+  ]
 })
 export class AddProductComponent implements OnInit {
 
@@ -43,7 +47,7 @@ export class AddProductComponent implements OnInit {
 
 
   onSubmit(content) {
-    console.log('on submit!');
+    
     let productId = this.addProductForm.controls['productId'].value;
     let productName = this.addProductForm.controls['productName'].value;
     let description = this.addProductForm.controls['description'].value;
@@ -53,7 +57,7 @@ export class AddProductComponent implements OnInit {
     let quantity = this.addProductForm.controls['quantity'].value;
 
     this.productService.addProduct(productId, productName, description, cover, category, price, quantity).subscribe(data=> {
-      console.log(JSON.stringify(data));
+      
       this.addProductForm.controls['productId'].setValue('');
       this.addProductForm.controls['productName'].setValue('');
       this.addProductForm.controls['description'].setValue('');

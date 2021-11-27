@@ -40,4 +40,8 @@ export class HistoryService {
     }))
   }
 
+  verifyPurchase(email: string, productId: number){
+    return this.httpClient.get<boolean>(this.baseURL + '/VerifyPurchase/' + email + '/' + productId);
+  }
+
 }

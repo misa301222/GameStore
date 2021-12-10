@@ -1,27 +1,19 @@
-# WebAuth
+# Store
+Store Web Application. Featuring role based user authentication (JWT). You can expect everything that an online store does. (Have your own money, add products to the cart, buy the products, if a product is out of stock you can't buy it, etc.) Also features an History component where you can see all the items prevously purchased.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.1.
+![image](https://user-images.githubusercontent.com/92189889/145521030-b4a3472c-6b32-4b14-8e43-dd00be8e9605.png)
 
-## Development server
+## Administrator role can use exclusive tools of managment
+That way you can add new products in the database, modify or delete relevant data. 
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+![image](https://user-images.githubusercontent.com/92189889/145520958-99acf0f0-bec9-4cf6-861c-bd5b778fd602.png)
 
-## Code scaffolding
+## Review Managment
+Each product have a review managment where different users can comment. You can like or dislike the comments. Also you can delete the review made by the same user.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+![image](https://user-images.githubusercontent.com/92189889/145521258-c47198a2-0b83-4086-a9e6-1cbef6ff3a27.png)
 
-## Build
+## Job Applications Managment
+Every user can send a job application (simulation). The administrator can reject or accept the application. If the application is accepted by the administrator, the user will see this screen.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+![image](https://user-images.githubusercontent.com/92189889/145521403-fd33b174-4da2-4b89-97c8-11878a059ef4.png)
